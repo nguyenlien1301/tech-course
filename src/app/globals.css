@@ -2,26 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-gray-100 dark:bg-grayDarkest dark:text-white;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .svg-animate {
+    stroke-dashoffset: 100;
+    stroke-dasharray: 100;
+    animation: dash 2s linear forwards;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .btn {
+    @apply w-full flex items-center justify-center rounded-lg text-white font-semibold h-11 bg-primary;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .hover-bg-btn-opacity {
+    @apply hover:bg-primary/20 text-white hover:text-purple transition-all;
   }
 }
