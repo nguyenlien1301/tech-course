@@ -10,7 +10,7 @@ export interface User extends Document {
   avatar: string;
   status: UserStatus; // Trạng thái user
   role: UserRole; // Phân quyền
-  createdAt: Date; // Ngày tạo user
+  created_at: Date; // Ngày tạo user
 }
 
 const userSchema = new Schema<User>({
@@ -49,7 +49,7 @@ const userSchema = new Schema<User>({
     enum: Object.values(UserRole),
     default: UserRole.USER,
   },
-  createdAt: {
+  created_at: {
     type: Date,
     default: Date.now,
   },
