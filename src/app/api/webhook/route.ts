@@ -1,10 +1,10 @@
 import { createUser } from "@/lib/actions/user.action";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Webhook } from "svix";
 
-async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const svixId = headers().get("svix-id") ?? "";
   const svixTimestamp = headers().get("svix-timestamp") ?? "";
   const svixSignature = headers().get("svix-signature") ?? "";
@@ -63,5 +63,3 @@ async function POST(request: Request) {
 
   return new Response("OK", { status: 200 });
 }
-
-export default POST;
