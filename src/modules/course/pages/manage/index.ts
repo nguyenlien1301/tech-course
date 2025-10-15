@@ -1,1 +1,1 @@
-export { default as CourseManagePage } from "./course-manage-page";
+export { default as CourseManageContainer } from "./course-manage-container";

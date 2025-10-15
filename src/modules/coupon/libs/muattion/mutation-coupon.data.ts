@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 import { QUERY_KEYS } from "@/shared/constants";
 import { parseData } from "@/shared/helper";
 import { getQueryClient } from "@/shared/lib/react-query";
-import { CreateCouponParams } from "@/shared/types";
+import { CreateCouponParams, UpdateCouponParams } from "@/shared/types";
 
-import { createCoupon, deleteCoupon } from "../../actions";
+import { createCoupon, deleteCoupon, updateCoupon } from "../../actions";
 
 export function useMutationCreateCoupon() {
   const queryClient = getQueryClient();
@@ -32,6 +32,32 @@ export function useMutationCreateCoupon() {
     },
     onError: () => {
       toast.error("Tạo mã giảm giá thất bại");
+    },
+  });
+}
+export function useMutationUpdateCoupon() {
+  const queryClient = getQueryClient();
+  const router = useRouter();
+
+  return useMutation({
+    mutationKey: [QUERY_KEYS.UPDATE_COUPON],
+    mutationFn: async (params: UpdateCouponParams) => {
+      const response = await updateCoupon(params);
+
+      return parseData(response);
+    },
+    // Khi thành công trả về một response và check dùng invalidateQueries refetch lại dựa trên FETCH_COURSES
+    onSuccess: (response) => {
+      if (response?.code) {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_COUPON],
+        });
+        toast.success("Cập nhật mã giảm giá thành công");
+        router.push("/manage/coupon");
+      }
+    },
+    onError: () => {
+      toast.error("Cập nhật mã giảm giá thất bại");
     },
   });
 }

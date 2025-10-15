@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 
 import CourseItem from "@/modules/course/components";

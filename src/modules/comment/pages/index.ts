@@ -1,1 +1,1 @@
-export * from "./comment-manage-page";
+export * from "./comment-manage";

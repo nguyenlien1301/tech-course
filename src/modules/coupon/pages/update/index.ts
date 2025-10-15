@@ -1,1 +1,1 @@
-export { default as UpdateCouponPage } from "./update-coupon-page";
+export { default as UpdateCouponContainer } from "./update-coupon-container";

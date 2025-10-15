@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth, UserButton } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 
 import {
@@ -75,7 +75,7 @@ const Header = () => {
       <div className="mt-auto flex items-center justify-end gap-5">
         <ModeToggle />
         {userId ? (
-          <UserButton />
+          <></> // <UserButton />
         ) : (
           <Link
             className="flex size-10 h-10 items-center justify-center gap-2 rounded-lg bg-secondary font-semibold text-white xl:w-auto xl:px-4"

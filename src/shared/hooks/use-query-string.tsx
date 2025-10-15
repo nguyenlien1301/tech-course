@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { allValue } from "@/shared/constants";
 
-function useQueryString() {
+export function useQueryString() {
   // pathname: Lấy ra đường dẫn hiện tại của trang
   const pathname = usePathname();
   // fucntion chức năng xoá khoá học
@@ -77,5 +77,3 @@ function useQueryString() {
     handleChangeQs,
   };
 }
-
-export default useQueryString;

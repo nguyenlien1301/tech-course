@@ -1,1 +1,1 @@
-export * from "./order-manage-page";
+export * from "./order-manage";

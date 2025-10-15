@@ -1,3 +1,4 @@
+"use client";
 import { menuItems } from "@/shared/constants/menu-constant";
 
 import { MenuItem } from "../common";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import LayoutWrapper from "@/shared/components/common/layout-wrapper";
 import { Header, MenuMobile, Sidebar } from "@/shared/components/layout";
 

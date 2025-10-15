@@ -140,8 +140,6 @@ export async function updateCoupon(params: UpdateCouponParams) {
       params.updateData,
     );
 
-    revalidatePath("/manage/coupon");
-
     return JSON.parse(JSON.stringify(updatedCoupon));
   } catch (error) {
     console.log("🚀error updateCoupon ---->", error);

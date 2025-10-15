@@ -1,1 +1,1 @@
-export * from "./rating-manage-page";
+export * from "./rating-manage";

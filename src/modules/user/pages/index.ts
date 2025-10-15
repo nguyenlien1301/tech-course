@@ -1,1 +1,1 @@
-export * from "./user-manage-page";
+export * from "./user-manage";

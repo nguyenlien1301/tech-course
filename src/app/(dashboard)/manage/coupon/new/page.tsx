@@ -1,13 +1,11 @@
-import { CreateCouponPage } from "@/modules/coupon/pages";
+import { CreateCouponContainer } from "@/modules/coupon/pages";
 import { Heading } from "@/shared/components/common";
 
-export interface CreateCouponPageRootProps {}
-
-function CreateCouponPageRoot(_props: CreateCouponPageRootProps) {
+function CreateCouponPageRoot() {
   return (
     <>
       <Heading>Tạo mới mã giảm giá</Heading>
-      <CreateCouponPage />
+      <CreateCouponContainer />
     </>
   );
 }

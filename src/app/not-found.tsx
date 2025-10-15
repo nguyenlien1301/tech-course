@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 import { IconHome } from "@/shared/components/icons";

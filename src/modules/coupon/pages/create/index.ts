@@ -1,1 +1,1 @@
-export { default as CreateCouponPage } from "./create-coupon-page";
+export { default as CreateCouponContainer } from "./create-coupon-container";

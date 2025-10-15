@@ -1,4 +1,4 @@
-import { UpdateCouponPage } from "@/modules/coupon/pages";
+import { UpdateCouponContainer } from "@/modules/coupon/pages";
 import { Heading } from "@/shared/components/common";
 
 export interface UpdateCouponPageRootProps {
@@ -11,7 +11,7 @@ function UpdateCouponPageRoot({ searchParams }: UpdateCouponPageRootProps) {
   return (
     <>
       <Heading>Cập nhật mã giảm giá</Heading>
-      <UpdateCouponPage code={searchParams.code} />;
+      <UpdateCouponContainer code={searchParams.code} />;
     </>
   );
 }

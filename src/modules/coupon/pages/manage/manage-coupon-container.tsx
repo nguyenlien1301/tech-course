@@ -55,6 +55,8 @@ const ManageCouponContainer = ({ searchParams }: QuerySearchParams) => {
   const mutationDeleteCoupon = useMutationDeleteCoupon();
 
   const coupons = data?.coupons || [];
+
+  console.log("🚀coupons---->", coupons);
   const total = data?.total || 0;
   const handleDeleteCoupon = async (code: string) => {
     Swal.fire({

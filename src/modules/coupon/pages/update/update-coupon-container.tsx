@@ -5,9 +5,11 @@ import { format } from "date-fns";
 import { debounce } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
-import { updateCoupon } from "@/modules/coupon/actions";
+import {
+  useMutationUpdateCoupon,
+  useQueryGetCouponCode,
+} from "@/modules/coupon/libs";
 import { couponCreateSchema } from "@/modules/coupon/schemas";
 import { CouponCreateFormValues } from "@/modules/coupon/types";
 import { fetchAllCoursesPublic } from "@/modules/course/actions";
@@ -36,11 +38,14 @@ import { CouponType, couponTypes } from "@/shared/constants";
 import { CouponItemData, CourseItemData } from "@/shared/types";
 
 interface UpdateCouponContainerProps {
-  couponDetails: CouponItemData;
+  code: string;
 }
-const UpdateCouponContainer = ({
-  couponDetails,
-}: UpdateCouponContainerProps) => {
+const UpdateCouponContainer = ({ code }: UpdateCouponContainerProps) => {
+  const mutationUpdateCoupon = useMutationUpdateCoupon();
+  const { data } = useQueryGetCouponCode(code);
+
+  const couponDetails = data ?? ({} as CouponItemData);
+
   const [findCourse, setFindCourse] = useState<CourseItemData[] | undefined>(
     [],
   );
@@ -57,7 +62,7 @@ const UpdateCouponContainer = ({
       title: couponDetails.title,
       code: couponDetails.code,
       active: couponDetails.active,
-      value: couponDetails.value.toString(),
+      value: couponDetails.value?.toString(),
       limit: couponDetails.limit,
       type: couponDetails.type,
     },
@@ -81,7 +86,7 @@ const UpdateCouponContainer = ({
           message: "Giá trị không hợp lệ",
         });
       }
-      const updatedCoupon = await updateCoupon({
+      mutationUpdateCoupon.mutateAsync({
         _id: couponDetails._id,
         updateData: {
           ...values,
@@ -91,10 +96,6 @@ const UpdateCouponContainer = ({
           courses: selectedCourses.map((course) => course._id.toString()),
         },
       });
-
-      if (updatedCoupon.code) {
-        toast.success("Cập nhật mã giảm giá thành công");
-      }
     } catch (error) {
       console.log("🚀error onsubmit CouponUpdate ---->", error);
     }

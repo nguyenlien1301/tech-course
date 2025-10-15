@@ -1,1 +1,1 @@
-export { default as ManageCouponPage } from "./manage-coupon-page";
+export { default as ManageCouponContainer } from "./manage-coupon-container";

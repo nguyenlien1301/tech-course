@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
 import { ThemeProvider } from "@/shared/components/common";
@@ -51,7 +52,9 @@ export default function RootLayout({
             <ReactQueryContext>
               <UserContextProvider>
                 <SidebarContextProvider>
-                  <NuqsAdapter>{children}</NuqsAdapter>
+                  <NuqsAdapter>
+                    <Suspense>{children}</Suspense>
+                  </NuqsAdapter>
                 </SidebarContextProvider>
               </UserContextProvider>
             </ReactQueryContext>

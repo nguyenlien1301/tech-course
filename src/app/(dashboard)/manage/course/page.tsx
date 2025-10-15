@@ -1,8 +1,8 @@
-import { CourseManagePage } from "@/modules/course/pages";
+import { CourseManageContainer } from "@/modules/course/pages";
 import { QuerySearchParams } from "@/shared/types";
 
 const CourseManagePageRoot = ({ searchParams }: QuerySearchParams) => {
-  return <CourseManagePage searchParams={searchParams} />;
+  return <CourseManageContainer searchParams={searchParams} />;
 };
 
 export default CourseManagePageRoot;

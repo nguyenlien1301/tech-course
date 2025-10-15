@@ -1,1 +1,4 @@
-export { useQueryFetchCoupon } from "./query-coupon.data";
+export {
+  useQueryFetchCoupon,
+  useQueryGetCouponCode,
+} from "./query-coupon.data";

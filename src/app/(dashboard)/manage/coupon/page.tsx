@@ -1,10 +1,10 @@
-import { ManageCouponPage } from "@/modules/coupon/pages";
+import { ManageCouponContainer } from "@/modules/coupon/pages";
 import { QuerySearchParams } from "@/shared/types";
 
 export interface ManageCouponPageRootProps {}
 
 function ManageCouponPageRoot({ searchParams }: QuerySearchParams) {
-  return <ManageCouponPage searchParams={searchParams} />;
+  return <ManageCouponContainer searchParams={searchParams} />;
 }
 
 export default ManageCouponPageRoot;
