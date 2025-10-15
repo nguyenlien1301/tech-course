@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-100 dark:bg-grayDarkest dark:text-white antialiased;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  button:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+@layer components {
+  .svg-animate {
+    stroke-dashoffset: 100;
+    stroke-dasharray: 100;
+    animation: dash 2s linear forwards;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .btn {
+    @apply w-full flex items-center justify-center rounded-lg text-white font-semibold h-11 bg-primary;
+  }
+
+  // class này dùng để css cho các nút hành động thêm sửa xoá manage
+  .action-buttons {
+    @apply size-8 rounded-md border border-gray-300 flex items-center justify-center p-2 hover:bg-gray-100 dark:hover:bg-white dark:hover:text-black transition-all;
+  }
+}
+
+@layer utilities {
+  .flexCenter {
+    @apply flex items-center justify-center;
+  }
+  .hover-bg-btn-opacity {
+    @apply hover:bg-primary/20 text-white hover:text-purple transition-all;
+  }
+  .textDarkMode {
+    @apply dark:text-slate-400;
+  }
+  .bgDarkMode {
+    @apply bg-white dark:bg-grayDark;
+  }
+  .borderDarkMode {
+    @apply border-gray-300 dark:border-grayDark;
+  }
+  .focus-primary:focus {
+    @apply focus:ring-4 focus:ring-primary/20;
+  }
+  .skeleton {
+    @apply bg-gray-200 dark:bg-grayDark animate-pulse;
+  }
+}
+
+@media screen and (max-width: 1023.98px) {
+  .course-slider {
+    justify-content: flex-start;
+    grid-auto-columns: 300px;
+    grid-auto-flow: column;
+    overflow: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding: 1rem;
+    grid-template-columns: unset;
+  }
+  .course-slider::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+  .course-slider > * {
+    scroll-snap-align: start;
+  }
+}
+
+.table-reponsive {
+  @media screen and (max-width: 1023.98px) {
+    th,
+    td {
+      &:not(:first-child) {
+        padding-left: 100px;
+      }
+    }
+  }
+}
+
+.entry-content {
+  font-size: 16px;
+  line-height: 2;
+  // p,
+  // h1,
+  // h2,
+  // h3,
+  // h4,
+  // h5,
+  // h6,
+  // ul,
+  // ol,
+  // figure {
+  //   @apply mb-5;
+  // }
+  // ol {
+  //   list-style: decimal;
+  // }
+  // ul {
+  //   list-style: disc;
+  // }
+  // ul,
+  // ul {
+  //   @apply pl-10;
+  // }
+  // a {
+  //   @apply underline text-primary font-medium;
+  // }
+}
+
+.animate-bar {
+  animation: width-bar 5s linear 1;
+}
+
+@keyframes width-bar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+.swal2-container {
+  .swal2-popup {
+    @apply w-full dark:bg-grayDark;
+    max-width: 440px;
+  }
+  .swal2-icon {
+    @apply size-12;
+  }
+  .swal2-icon-content {
+    @apply text-4xl;
+  }
+  .swal2-title {
+    @apply text-xl font-bold dark:text-white;
+  }
+  .swal2-html-container {
+    @apply dark:text-slate-400;
+  }
+  .swal2-confirm,
+  .swal2-cancel {
+    @apply px-6 py-2 text-sm;
+  }
+}

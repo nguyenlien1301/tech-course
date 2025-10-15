@@ -1,8 +1,16 @@
-import { ThemeProvider } from "@/components/common/theme-provider";
-import { manrope } from "@/utils";
+import "./globals.scss";
+
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import "./globals.css";
+import { Manrope } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { ToastContainer } from "react-toastify";
+
+import { ThemeProvider } from "@/shared/components/common";
+import { SidebarContextProvider, UserContextProvider } from "@/shared/contexts";
+import ReactQueryContext from "@/shared/contexts/react-query-context";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -14,6 +22,11 @@ import "./globals.css";
 //   variable: "--font-geist-mono",
 //   weight: "100 900",
 // });
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
   title: "TechCourse",
@@ -32,10 +45,19 @@ export default function RootLayout({
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
-            enableSystem
             disableTransitionOnChange
+            enableSystem
           >
-            {children}
+            <ReactQueryContext>
+              <UserContextProvider>
+                <SidebarContextProvider>
+                  <NuqsAdapter>{children}</NuqsAdapter>
+                </SidebarContextProvider>
+              </UserContextProvider>
+            </ReactQueryContext>
+            <SpeedInsights />
+            <Analytics />
+            <ToastContainer autoClose={2000} draggable />
           </ThemeProvider>
         </body>
       </html>

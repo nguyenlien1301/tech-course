@@ -1,18 +1,11 @@
-import { CourseGrid } from "@/components/common";
-import CourseItem from "@/components/course/course-item";
-import Heading from "@/components/Typography/Heading";
+import { CourseDashboardPage } from "@/modules/course/pages";
 
-const page = async () => {
+const HomePage = () => {
   return (
-    <div>
-      <Heading>Khám phá</Heading>
-      <CourseGrid>
-        <CourseItem />
-        <CourseItem />
-        <CourseItem />
-      </CourseGrid>
-    </div>
+    <>
+      <CourseDashboardPage />
+    </>
   );
 };
 
-export default page;
+export default HomePage;

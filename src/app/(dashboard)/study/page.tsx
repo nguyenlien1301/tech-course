@@ -1,17 +1,13 @@
-import { CourseGrid } from "@/components/common";
-import CourseItem from "@/components/course/course-item";
-import Heading from "@/components/Typography/Heading";
+import { StudyPage } from "@/modules/course/pages";
+import { Heading } from "@/shared/components/common";
 
-const page = () => {
+const StudyPageRoot = () => {
   return (
     <div>
       <Heading>Khu vực học tập</Heading>
-      <CourseGrid>
-        <CourseItem />
-        <CourseItem />
-      </CourseGrid>
+      <StudyPage />
     </div>
   );
 };
 
-export default page;
+export default StudyPageRoot;

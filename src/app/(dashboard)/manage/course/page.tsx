@@ -1,5 +1,8 @@
-const page = () => {
-  return <div>Manage Course</div>;
+import { CourseManagePage } from "@/modules/course/pages";
+import { QuerySearchParams } from "@/shared/types";
+
+const CourseManagePageRoot = ({ searchParams }: QuerySearchParams) => {
+  return <CourseManagePage searchParams={searchParams} />;
 };
 
-export default page;
+export default CourseManagePageRoot;

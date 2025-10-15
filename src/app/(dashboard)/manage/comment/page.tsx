@@ -1,5 +1,8 @@
-const page = () => {
-  return <div>Manage Comment</div>;
-};
+import { CommentManagePage } from "@/modules/comment/pages";
+import { QuerySearchParams } from "@/shared/types";
 
-export default page;
+function CommentPageRoot({ searchParams }: QuerySearchParams) {
+  return <CommentManagePage searchParams={searchParams} />;
+}
+
+export default CommentPageRoot;
