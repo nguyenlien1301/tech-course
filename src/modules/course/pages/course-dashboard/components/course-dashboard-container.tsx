@@ -1,5 +1,4 @@
 "use client";
-import { Heading } from "@/shared/components/common";
 import { useUserContext } from "@/shared/contexts";
 
 import CourseContinue from "./course-continue";
@@ -21,14 +20,9 @@ const CourseDashboardContainer = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
-        <Heading className="lg:text-xl">Tiếp tục học</Heading>
-        <CourseContinue />
-      </div>
-      <div className="flex flex-col">
-        <Heading className="lg:text-xl">Đề xuất</Heading>
-        <CourseSuggestion />
-      </div>
+
+      <CourseContinue />
+      <CourseSuggestion />
     </div>
   );
 };

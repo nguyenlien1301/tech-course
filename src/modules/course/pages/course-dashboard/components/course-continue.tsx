@@ -1,12 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
 
-import CourseItem from "@/modules/course/components";
+import CourseItemContinue from "@/modules/course/components/course-item-continue";
 import { useQueryFetchUserCoursesContinue } from "@/modules/course/libs/react-query";
-import { LastLessonData } from "@/modules/course/types";
-import { CourseGrid } from "@/shared/components/common";
-import { lastLessonKey } from "@/shared/constants";
+import { CourseGrid, Heading } from "@/shared/components/common";
 import { useUserContext } from "@/shared/contexts";
+import { handleGetStorageLesson } from "@/shared/helper";
 
 const CourseContinue = () => {
   const { userInfo } = useUserContext();
@@ -14,38 +12,35 @@ const CourseContinue = () => {
     clerkId: userInfo?.clerkId || "",
   });
   const courseList = data || [];
-  const [lastLesson, setLastLesson] = useState<LastLessonData[]>([]);
 
-  useEffect(() => {
-    if (typeof localStorage === "undefined") return;
-    const lesson = localStorage
-      ? JSON.parse(localStorage?.getItem(lastLessonKey) || "[]") || []
-      : [];
-
-    setLastLesson(lesson);
-  }, []);
+  // if (isLoading && courseList.length === 0)
+  //   return <EmptyData text="Bạn chưa có khoá học nào" />;
 
   return (
-    <CourseGrid isLoading={isLoading}>
-      {!!courseList &&
-        courseList.length > 0 &&
-        courseList.map((course, index) => {
-          const firstLessonUrl = course?.lectures?.[0]?.lessons?.[0]?._id;
+    <div className="flex flex-col">
+      <Heading className="lg:text-xl">Tiếp tục học</Heading>
+      <CourseGrid isLoading={isLoading}>
+        {!!courseList &&
+          courseList.length > 0 &&
+          courseList.map((course, index) => {
+            const firstLessonUrl = course?.lectures?.[0]?.lessons?.[0]?._id;
 
-          const lastURL =
-            lastLesson.find((element) => element.course === course.slug)
-              ?.lesson || `/${course.slug}/lesson?id=${firstLessonUrl}`;
+            const url = handleGetStorageLesson({
+              courseSlug: course.slug,
+              lessonId: firstLessonUrl,
+            });
 
-          return (
-            <CourseItem
-              key={course.slug || index}
-              cta="Tiếp tục học"
-              data={course}
-              url={lastURL}
-            />
-          );
-        })}
-    </CourseGrid>
+            return (
+              <CourseItemContinue
+                key={course.slug || index}
+                cta="Tiếp tục học"
+                data={course}
+                url={url}
+              />
+            );
+          })}
+      </CourseGrid>
+    </div>
   );
 };
 

@@ -52,7 +52,7 @@
     @apply bg-white dark:bg-grayDark;
   }
   .borderDarkMode {
-    @apply border-gray-300 dark:border-grayDark;
+    @apply border border-gray-300 dark:border-grayDark;
   }
   .focus-primary:focus {
     @apply focus:ring-4 focus:ring-primary/20;

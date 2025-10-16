@@ -58,3 +58,21 @@ export const menuItems: MenuField[] = [
     icon: <IconComment className="shirk-0 size-6" />,
   },
 ];
+
+export const menuItemUser: MenuField[] = [
+  {
+    url: "/",
+    title: "Trang chủ",
+    icon: <IconHome className="shirk-0 size-6" />,
+  },
+  {
+    url: "/explore",
+    title: "Khám phá",
+    icon: <IconDiscover className="shirk-0 size-6" />,
+  },
+  {
+    url: "/study",
+    title: "Khu vực học tập",
+    icon: <IconStudy className="shirk-0 size-6" />,
+  },
+];

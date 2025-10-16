@@ -36,7 +36,9 @@ import { CourseItemData } from "@/shared/types";
 const CreateCouponContainer = () => {
   const mutationCreateCoupon = useMutationCreateCoupon();
   const [startDate, setStartDate] = useState<Date>();
+
   const [endDate, setEndDate] = useState<Date>();
+
   const [findCourse, setFindCourse] = useState<CourseItemData[] | undefined>(
     [],
   );
@@ -57,30 +59,29 @@ const CreateCouponContainer = () => {
   });
 
   async function onSubmit(values: CouponCreateFormValues) {
-    const couponType = values.type;
-    const couponValue = Number(values.value?.replace(/,/g, ""));
+    try {
+      const couponType = values.type;
+      const couponValue = Number(values.value?.replace(/,/g, ""));
 
-    if (
-      (couponType === CouponType.PERCENT && couponValue > 100) ||
-      couponValue < 0
-    ) {
-      form.setError("value", {
-        message: "Giá trị không hợp lệ",
+      if (
+        (couponType === CouponType.PERCENT && couponValue > 100) ||
+        couponValue < 0
+      ) {
+        form.setError("value", {
+          message: "Giá trị không hợp lệ",
+        });
+      }
+      await mutationCreateCoupon.mutateAsync({
+        ...values,
+        value: couponValue,
+        start_date: startDate,
+        end_date: endDate,
+        courses: selectedCourses.map((course) => course._id),
       });
+    } catch (error) {
+      console.log("🚀error---->", error);
     }
-    await mutationCreateCoupon.mutateAsync({
-      ...values,
-      value: couponValue,
-      start_date: startDate,
-      end_date: endDate,
-      courses: selectedCourses.map((course) => course._id),
-    });
-
-    // if (newCoupon.code) {
-    //   router.push("/manage/coupon");
-    // }
   }
-
   //   handleSearchCourse: hàm để tìm khoá học
   const handleSearchCourse = debounce(
     async (event: React.ChangeEvent<HTMLInputElement>) => {

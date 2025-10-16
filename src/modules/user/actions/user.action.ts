@@ -45,9 +45,12 @@ export async function fetchUsers(params: QueryFilter): Promise<
 // Vì dữ liệu nó trả về any vì vậy nên dùng Promise<User | undefined> vì nó là asyn await và mong muốn nó sẽ trả về đúng với mong mún của mình
 // Hàm tạo user
 export async function createUser(params: CreateUserParams) {
+  console.log("🚀params---->", params);
   try {
     connectToDatabase();
     const newUser = await UserModel.create(params);
+
+    console.log("🚀newUser---->", newUser);
 
     return newUser;
   } catch (error) {

@@ -7,11 +7,11 @@ import {
   IconChevronDoubleLeft,
   IconChevronDoubleRight,
 } from "@/shared/components/icons";
-import { menuItems } from "@/shared/constants/menu-constant";
+import { menuItemUser } from "@/shared/constants/menu-constant";
 import { useSidebarContext } from "@/shared/contexts";
 import { cn } from "@/shared/utils";
 
-const Sidebar = () => {
+const SidebarUser = () => {
   const { isButtonActive, isOpen, setIsButtonActive, setIsOpen } =
     useSidebarContext();
 
@@ -167,7 +167,7 @@ const Sidebar = () => {
         )}
       </div>
       <ul className="mt-5 flex flex-col gap-2">
-        {menuItems.map((item) => (
+        {menuItemUser.map((item) => (
           <MenuItem
             key={item.title}
             icon={item.icon}
@@ -181,4 +181,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SidebarUser;

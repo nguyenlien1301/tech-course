@@ -1,4 +1,3 @@
-"use client";
 import { Suspense } from "react";
 
 import PageNotFound from "@/app/not-found";

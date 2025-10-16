@@ -44,3 +44,8 @@ export const allValue = "All";
 export const ITEM_PER_PAGE = 1;
 export const MAX_COMMENT_LEVEL = 3;
 export const COMMENT_SPACING = 65;
+
+export interface StorageLesson {
+  course: string;
+  lesson: string;
+}

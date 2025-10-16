@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
@@ -53,6 +54,16 @@ export default function RootLayout({
               <UserContextProvider>
                 <SidebarContextProvider>
                   <NuqsAdapter>
+                    <NextTopLoader
+                      color="#29D"
+                      crawl={true}
+                      crawlSpeed={200}
+                      easing="ease"
+                      height={5}
+                      initialPosition={0.08}
+                      showSpinner={false}
+                      speed={200}
+                    />
                     <Suspense>{children}</Suspense>
                   </NuqsAdapter>
                 </SidebarContextProvider>
