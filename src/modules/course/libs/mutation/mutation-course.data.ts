@@ -14,7 +14,6 @@ export function useMutationCreateCourse() {
   const queryClient = getQueryClient();
 
   return useMutation({
-    mutationKey: [QUERY_KEYS.CREATE_COURSE],
     mutationFn: async (data: CreateCourseParams) => {
       const response = await createCourse(data);
 
@@ -46,6 +45,9 @@ export function useMutationUpdateCourse() {
       if (response?.success) {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_COURSES],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_COURSE_SUMMARY],
         });
       }
     },

@@ -3,7 +3,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/shared/constants";
 import { QueryFilter } from "@/shared/types";
 
-import { fetchRatings } from "../../actions";
+import { fetchRatings, fetchRatingSummary } from "../../actions";
 
 interface QueryFetchRatingProps extends QueryFilter {}
 
@@ -23,5 +23,18 @@ export const useQueryFetchRating = (props: QueryFetchRatingProps) => {
     },
     placeholderData: keepPreviousData, // data tạm.
     refetchOnWindowFocus: true,
+  });
+};
+
+export const useQueryFetchRatingSummary = () => {
+  return useQuery({
+    enabled: true,
+    queryKey: [QUERY_KEYS.FETCH_RATING_SUMMARY], // queryKey: là dùng để định danh nếu để trùng thì khi fetch nó fetch nó sẽ fetch 2 cái
+    queryFn: async () => {
+      const response = await fetchRatingSummary();
+
+      return response || [];
+    },
+    placeholderData: keepPreviousData, // data tạm.
   });
 };

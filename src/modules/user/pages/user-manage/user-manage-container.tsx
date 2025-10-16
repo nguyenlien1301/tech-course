@@ -4,9 +4,13 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-import { deleteUser, updateUser } from "@/modules/user/actions";
+import { deleteUser } from "@/modules/user/actions";
 import SkeletonTableUser from "@/modules/user/components/skeleton-table-user";
-import { useQueryFetchUser } from "@/modules/user/libs";
+import {
+  useMutationUpdateUser,
+  useQueryFetchUser,
+  useQueryFetchUserSummary,
+} from "@/modules/user/libs";
 import {
   BadgeStatus,
   EmptyData,
@@ -42,9 +46,13 @@ import { formatDate } from "@/shared/helper";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
+import UserSummary from "./components/user-summary";
+
 const UserManageContainer = ({ searchParams }: QuerySearchParams) => {
   const { handleSearchData, handleSelectStatus, handleSetDefaultStatus } =
     useQueryString();
+  const mutationUpdateUser = useMutationUpdateUser();
+  const { data: userSummaryData } = useQueryFetchUserSummary();
 
   const { data, isFetching } = useQueryFetchUser({
     page: searchParams.page || 1,
@@ -73,10 +81,14 @@ const UserManageContainer = ({ searchParams }: QuerySearchParams) => {
           cancelButtonText: "Thoát",
         }).then(async (result) => {
           if (result.isConfirmed) {
-            await updateUser({
+            const result = await mutationUpdateUser.mutateAsync({
               userId,
               status,
             });
+
+            if (result?.success) {
+              toast.success("Cấm tài khoản thành công");
+            }
           }
         });
       }
@@ -91,19 +103,19 @@ const UserManageContainer = ({ searchParams }: QuerySearchParams) => {
           cancelButtonText: "Thoát",
         }).then(async (result) => {
           if (result.isConfirmed) {
-            const response = await updateUser({
+            const response = await mutationUpdateUser.mutateAsync({
               userId,
               status,
             });
 
             if (response?.success) {
-              toast.success("Quay lại trạng thái chưa kích hoạt thành công");
+              toast.success("Đã quay lại trạng thái chưa kích hoạt");
             }
           }
         });
       }
       if (status === UserStatus.ACTIVE) {
-        const hasResult = await updateUser({
+        const hasResult = await mutationUpdateUser.mutateAsync({
           userId,
           status,
         });
@@ -267,11 +279,9 @@ const UserManageContainer = ({ searchParams }: QuerySearchParams) => {
         </TableBody>
       </Table>
       <Pagination total={total} />
+      <UserSummary users={userSummaryData} />
     </>
   );
 };
 
 export default UserManageContainer;
-
-// trang thái mới tạo là unactive thì phải có icon check (duyệt).
-//

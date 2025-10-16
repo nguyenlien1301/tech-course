@@ -17,7 +17,6 @@ import {
   EmptyData,
   Heading,
   Pagination,
-  SummaryCard,
   TableAction,
   TableActionItem,
   TotalCount,
@@ -42,6 +41,8 @@ import { formatCurrency, formatDate } from "@/shared/helper";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
+import CourseSummary from "./components/course-summary";
+
 const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
   const { handleSearchData, handleSelectStatus, handleSetDefaultStatus } =
     useQueryString();
@@ -53,7 +54,6 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
   });
   const { data: courseSummaryData } = useQueryFetchCoursesSummary();
 
-  console.log("🚀courseSummaryData---->", courseSummaryData);
   const courses = data?.courses || [];
   const total = data?.total || 0;
   // fucntion chức năng xoá khoá học
@@ -279,7 +279,7 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
         </TableBody>
       </Table>
       <Pagination total={total} />
-      <SummaryCard courses={courseSummaryData} />
+      <CourseSummary courses={courseSummaryData} />
     </>
   );
 };

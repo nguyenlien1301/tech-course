@@ -3,7 +3,11 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/shared/constants";
 import { QueryFilter } from "@/shared/types";
 
-import { fetchCoupons, getCouponByCode } from "../../actions";
+import {
+  fetchCoupons,
+  fetchCouponSummary,
+  getCouponByCode,
+} from "../../actions";
 
 interface QueryFetchCouponProps extends QueryFilter {}
 
@@ -36,5 +40,18 @@ export const useQueryGetCouponCode = (code: string) => {
     },
     placeholderData: keepPreviousData, // data tạm.
     refetchOnWindowFocus: true,
+  });
+};
+
+export const useQueryFetchCouponSummary = () => {
+  return useQuery({
+    enabled: true,
+    queryKey: [QUERY_KEYS.FETCH_COUPON_SUMMARY], // queryKey: là dùng để định danh nếu để trùng thì khi fetch nó fetch nó sẽ fetch 2 cái
+    queryFn: async () => {
+      const response = await fetchCouponSummary();
+
+      return response || [];
+    },
+    placeholderData: keepPreviousData, // data tạm.
   });
 };

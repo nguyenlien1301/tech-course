@@ -4,9 +4,12 @@ import { SelectGroup } from "@radix-ui/react-select";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-import { updateOrder } from "@/modules/order/actions";
 import SkeletonTableOrder from "@/modules/order/components/skeleton-table-order";
-import { useQueryFetchOrder } from "@/modules/order/libs";
+import {
+  useMutationUpdateOrder,
+  useQueryFetchOrder,
+  useQueryFetchOrderSummary,
+} from "@/modules/order/libs";
 import {
   BadgeStatus,
   EmptyData,
@@ -37,9 +40,15 @@ import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 import { cn } from "@/shared/utils/common";
 
+import OrderSummary from "./components/order-summary";
+
 const OrderManageContainer = ({ searchParams }: QuerySearchParams) => {
   const { handleSearchData, handleSelectStatus, handleSetDefaultStatus } =
     useQueryString();
+  const mutationUpdateOrder = useMutationUpdateOrder();
+  const { data: orderSummaryData } = useQueryFetchOrderSummary();
+
+  console.log("🚀orderSummaryData---->", orderSummaryData);
   const { data, isFetching } = useQueryFetchOrder({
     page: searchParams.page || 1,
     limit: ITEM_PER_PAGE,
@@ -67,10 +76,14 @@ const OrderManageContainer = ({ searchParams }: QuerySearchParams) => {
           cancelButtonText: "Thoát",
         }).then(async (result) => {
           if (result.isConfirmed) {
-            await updateOrder({
+            const hasResult = await mutationUpdateOrder.mutateAsync({
               orderId,
               status,
             });
+
+            if (hasResult?.success) {
+              toast.success("Huỷ đơn hàng thành công");
+            }
           }
         });
       }
@@ -96,7 +109,7 @@ const OrderManageContainer = ({ searchParams }: QuerySearchParams) => {
       //     });
       //   }
       if (status === OrderStatus.COMPLETED) {
-        const hasResult = await updateOrder({
+        const hasResult = await mutationUpdateOrder.mutateAsync({
           orderId,
           status,
         });
@@ -227,7 +240,7 @@ const OrderManageContainer = ({ searchParams }: QuerySearchParams) => {
         </TableBody>
       </Table>
       <Pagination total={total} />
-      {/* <SummaryCard ratings={ratings} /> */}
+      <OrderSummary orders={orderSummaryData} />
     </>
   );
 };

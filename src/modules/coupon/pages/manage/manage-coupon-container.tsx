@@ -6,6 +6,7 @@ import SkeletonTableCoupon from "@/modules/coupon/components/skeleton-table-coup
 import {
   useMutationDeleteCoupon,
   useQueryFetchCoupon,
+  useQueryFetchCouponSummary,
 } from "@/modules/coupon/libs";
 import {
   BadgeStatus,
@@ -42,9 +43,13 @@ import { formatCurrency, formatDate } from "@/shared/helper";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
+import CouponSummary from "./components/coupon-summary";
+
 const ManageCouponContainer = ({ searchParams }: QuerySearchParams) => {
   const { handleChangeQs, handleSearchData, handleSetDefaultStatus } =
     useQueryString();
+  const { data: couponSummaryData } = useQueryFetchCouponSummary();
+
   const { data, isFetching } = useQueryFetchCoupon({
     page: searchParams.page || 1,
     limit: ITEM_PER_PAGE,
@@ -175,6 +180,7 @@ const ManageCouponContainer = ({ searchParams }: QuerySearchParams) => {
         </TableBody>
       </Table>
       <Pagination total={total} />
+      <CouponSummary coupons={couponSummaryData} />
     </>
   );
 };

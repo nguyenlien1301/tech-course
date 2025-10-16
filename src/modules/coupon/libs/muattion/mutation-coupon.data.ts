@@ -52,6 +52,9 @@ export function useMutationUpdateCoupon() {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_COUPON],
         });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_COUPON_SUMMARY],
+        });
         toast.success("Cập nhật mã giảm giá thành công");
         router.push("/manage/coupon");
       }

@@ -13,6 +13,28 @@ import {
   QuerySortFilter,
 } from "@/shared/types";
 
+export async function fetchCommentSummary() {
+  try {
+    connectToDatabase();
+
+    // Đếm theo trạng thái
+    const [completed, pending, canceled] = await Promise.all([
+      CommentModel.countDocuments({ status: CommentStatus.COMPLETED }),
+      CommentModel.countDocuments({ status: CommentStatus.PENDING }),
+      CommentModel.countDocuments({ status: CommentStatus.CANCELED }),
+    ]);
+
+    return {
+      completed,
+      pending,
+      canceled,
+    };
+  } catch (error) {
+    console.error("🚀 error fetchCourseSummary --->", error);
+    throw error;
+  }
+}
+
 export async function fetchComments(params: QueryFilter): Promise<
   | {
       comments: CommentItemData[] | undefined;

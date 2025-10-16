@@ -9,6 +9,7 @@ import {
   useMutationDeleteComment,
   useMutationUpdateComment,
   useQueryFetchComment,
+  useQueryFetchCommentsSummary,
 } from "@/modules/comment/libs";
 import {
   BadgeStatus,
@@ -39,9 +40,12 @@ import { formatDate, timeAgo } from "@/shared/helper";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
+import CommentSummary from "./components/comment-summary";
+
 const CommentManageContainer = ({ searchParams }: QuerySearchParams) => {
   const { handleSearchData, handleSelectStatus, handleSetDefaultStatus } =
     useQueryString();
+  const { data: commentSummaryData } = useQueryFetchCommentsSummary();
   const mutationUpdateComment = useMutationUpdateComment();
   const mutationDeleteComment = useMutationDeleteComment();
   const { data, isFetching } = useQueryFetchComment({
@@ -275,6 +279,7 @@ const CommentManageContainer = ({ searchParams }: QuerySearchParams) => {
         </TableBody>
       </Table>
       <Pagination total={total} />
+      <CommentSummary comments={commentSummaryData} />
     </>
   );
 };

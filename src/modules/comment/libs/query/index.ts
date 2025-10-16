@@ -1,1 +1,4 @@
-export { useQueryFetchComment } from "./query-comment.data";
+export {
+  useQueryFetchComment,
+  useQueryFetchCommentsSummary,
+} from "./query-comment.data";

@@ -1,1 +1,1 @@
-export { useQueryFetchUser } from "./query-user";
+export { useQueryFetchUser, useQueryFetchUserSummary } from "./query-user";

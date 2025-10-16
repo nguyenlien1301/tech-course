@@ -8,7 +8,6 @@ export { default as Loading } from "./loading";
 export { default as MenuItem } from "./menu-item";
 export { default as ModeToggle } from "./mode-toggle";
 export { default as Pagination } from "./pagination";
-export { default as SummaryCard } from "./summary-card";
 export { default as TableAction } from "./table-action";
 export { default as TableActionItem } from "./table-action-item";
 export { default as ThemeProvider } from "./theme-provider";

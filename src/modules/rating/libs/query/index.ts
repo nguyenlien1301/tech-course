@@ -1,1 +1,4 @@
-export { useQueryFetchRating } from "./query-rating.data";
+export {
+  useQueryFetchRating,
+  useQueryFetchRatingSummary,
+} from "./query-rating.data";

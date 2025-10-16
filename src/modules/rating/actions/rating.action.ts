@@ -12,6 +12,26 @@ import {
   RatingItemData,
 } from "@/shared/types";
 
+export async function fetchRatingSummary() {
+  try {
+    connectToDatabase();
+
+    // Đếm theo trạng thái
+    const [active, unactive] = await Promise.all([
+      RatingModel.countDocuments({ status: RatingStatus.ACTIVE }),
+      RatingModel.countDocuments({ status: RatingStatus.UNACTIVE }),
+    ]);
+
+    return {
+      active,
+      unactive,
+    };
+  } catch (error) {
+    console.error("🚀 error fetchRatingSummary --->", error);
+    throw error;
+  }
+}
+
 export async function fetchRatings(params: QueryFilter): Promise<
   | {
       ratings: RatingItemData[] | undefined;

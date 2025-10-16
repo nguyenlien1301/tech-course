@@ -12,6 +12,42 @@ import {
   UpdateCouponParams,
 } from "@/shared/types";
 
+export async function fetchCouponSummary() {
+  try {
+    connectToDatabase();
+
+    // Đếm theo trạng thái
+    const [active, unactive] = await Promise.all([
+      CouponModel.countDocuments({ active: true }),
+      CouponModel.countDocuments({ active: false }),
+    ]);
+
+    // Tính tổng doanh thu
+    // (giả sử mỗi course có field price và số người học enrollCount)
+    const allCourses = await CouponModel.find({
+      active: true,
+    });
+
+    // const totalRevenue = allCourses?.reduce((sum, acc) => {
+    //   return sum + (Number(acc.price) || 0) * (Number(acc.enrollCount) || 0);
+    // }, 0);
+    const totalRevenue = allCourses?.reduce((sum, item) => {
+      const total = sum + item.value;
+
+      return total;
+    }, 0);
+
+    return {
+      active,
+      unactive,
+      totalRevenue,
+    };
+  } catch (error) {
+    console.error("🚀 error fetchCourseSummary --->", error);
+    throw error;
+  }
+}
+
 export async function fetchCoupons(params: QueryFilter): Promise<
   | {
       coupons: CouponItemData[] | undefined;

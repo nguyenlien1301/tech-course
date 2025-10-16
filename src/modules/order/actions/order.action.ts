@@ -14,6 +14,43 @@ import {
 import { QueryFilter } from "@/shared/types";
 import { CreateOrderParams, OrderItemData } from "@/shared/types/order.type";
 
+export async function fetchOrderSummary() {
+  try {
+    connectToDatabase();
+
+    // Đếm theo trạng thái
+    const [completed, pending, canceled] = await Promise.all([
+      OrderModel.countDocuments({ status: OrderStatus.COMPLETED }),
+      OrderModel.countDocuments({ status: OrderStatus.PENDING }),
+      OrderModel.countDocuments({ status: OrderStatus.CANCELED }),
+    ]);
+    // Tính tổng doanh thu
+    // (giả sử mỗi course có field price và số người học enrollCount)
+    const allCourses = await OrderModel.find({
+      status: OrderStatus.COMPLETED,
+    });
+
+    // const totalRevenue = allCourses?.reduce((sum, acc) => {
+    //   return sum + (Number(acc.price) || 0) * (Number(acc.enrollCount) || 0);
+    // }, 0);
+    const totalRevenue = allCourses?.reduce((sum, item) => {
+      const total = sum + item.total;
+
+      return total;
+    }, 0);
+
+    return {
+      completed,
+      pending,
+      canceled,
+      totalRevenue,
+    };
+  } catch (error) {
+    console.error("🚀 error fetchOrderSummary --->", error);
+    throw error;
+  }
+}
+
 interface FetchOrdersResponse {
   total: number;
   orders: OrderItemData[];
@@ -65,6 +102,7 @@ export async function fetchOrders(
     console.log("🚀error fetchOrders---->", error);
   }
 }
+
 export async function getOrderDetail({ code }: { code: string }) {
   try {
     connectToDatabase();
@@ -123,7 +161,6 @@ export async function updateOrder({
         select: "_id",
       });
 
-    console.log("🚀 findOrder---->", findOrder);
     if (!findOrder) return;
     // Kiếm tra nếu findOrder.status bằng với OrderStatus.CANCELED thì dừng chương trình.
     if (findOrder.status === OrderStatus.CANCELED) return;

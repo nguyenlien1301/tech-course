@@ -31,9 +31,6 @@ export async function fetchCourseSummary() {
       CourseModel.countDocuments({ status: CourseStatus.REJECTED }),
     ]);
 
-    console.log("🚀approved---->", approved);
-    console.log("🚀pending---->", pending);
-    console.log("🚀canceled---->", canceled);
     // Tính tổng doanh thu
     // (giả sử mỗi course có field price và số người học enrollCount)
     const allCourses = await CourseModel.find({
@@ -208,8 +205,6 @@ export async function fetchAllCoursesPublic(
       .skip(skip)
       .limit(limit)
       .sort({ created_at: -1 });
-
-    console.log("🚀courses---->", courses);
 
     return JSON.parse(JSON.stringify(courses));
   } catch (error) {

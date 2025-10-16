@@ -54,6 +54,5 @@ export const useQueryFetchCoursesSummary = () => {
       return response || [];
     },
     placeholderData: keepPreviousData, // data tạm.
-    refetchOnWindowFocus: true,
   });
 };

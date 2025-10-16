@@ -8,6 +8,7 @@ import SkeletonTableRating from "@/modules/rating/components/skeleton-table-rati
 import {
   useMutationUpdateRating,
   useQueryFetchRating,
+  useQueryFetchRatingSummary,
 } from "@/modules/rating/libs";
 import { useMutationDeleteRating } from "@/modules/rating/libs/mutation/mutation-rating.data";
 import {
@@ -40,9 +41,12 @@ import { formatDate } from "@/shared/helper";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
+import RatingSummary from "./components/rating-summary";
+
 const RatingManageContainer = ({ searchParams }: QuerySearchParams) => {
   const { handleSearchData, handleSelectStatus, handleSetDefaultStatus } =
     useQueryString();
+  const { data: ratingSummaryData } = useQueryFetchRatingSummary();
   const mutationUpdateRating = useMutationUpdateRating();
   const mutationDeleteRating = useMutationDeleteRating();
   const { data, isFetching } = useQueryFetchRating({
@@ -188,6 +192,7 @@ const RatingManageContainer = ({ searchParams }: QuerySearchParams) => {
         </TableBody>
       </Table>
       <Pagination total={total} />
+      <RatingSummary ratings={ratingSummaryData} />
     </>
   );
 };

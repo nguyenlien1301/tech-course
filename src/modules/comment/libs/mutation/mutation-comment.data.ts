@@ -53,6 +53,9 @@ export function useMutationUpdateComment() {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_COMMENTS],
         });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_COMMENT_SUMMARY],
+        });
       }
     },
     onError: () => {

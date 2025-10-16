@@ -9,6 +9,28 @@ import { UserModel } from "@/shared/schemas";
 import { CreateUserParams, QueryFilter, UserItemData } from "@/shared/types";
 import { User } from "@/shared/types/models";
 
+export async function fetchUserSummary() {
+  try {
+    connectToDatabase();
+
+    // Đếm theo trạng thái
+    const [active, unactive, baned] = await Promise.all([
+      UserModel.countDocuments({ status: UserStatus.ACTIVE }),
+      UserModel.countDocuments({ status: UserStatus.UNACTIVE }),
+      UserModel.countDocuments({ status: UserStatus.BANED }),
+    ]);
+
+    return {
+      active,
+      unactive,
+      baned,
+    };
+  } catch (error) {
+    console.error("🚀 error fetchUserSummary --->", error);
+    throw error;
+  }
+}
+
 export async function fetchUsers(params: QueryFilter): Promise<
   | {
       users: UserItemData[] | undefined;

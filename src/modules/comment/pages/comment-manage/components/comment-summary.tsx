@@ -1,24 +1,17 @@
+"use client";
 import React from "react";
 
-import { formatCurrency } from "@/shared/helper";
+import { IconCube } from "@/shared/components/icons";
 
-import { IconCube } from "../icons";
-
-interface SummaryCardProps {
-  courses?: {
-    approved: number;
+interface CommentSummaryProps {
+  comments?: {
+    completed: number;
     canceled: number;
     pending: number;
-    totalRevenue: number;
   };
 }
-const SummaryCard = ({ courses }: SummaryCardProps) => {
-  const {
-    approved = 0,
-    canceled = 0,
-    pending = 0,
-    totalRevenue = 0,
-  } = courses || {};
+const CommentSummary = ({ comments }: CommentSummaryProps) => {
+  const { canceled = 0, completed = 0, pending = 0 } = comments || {};
   const SummaryCardItem: {
     title: string;
     content: React.ReactNode;
@@ -29,7 +22,7 @@ const SummaryCard = ({ courses }: SummaryCardProps) => {
   }[] = [
     {
       title: "Đã duyệt",
-      content: approved,
+      content: completed,
       className: {
         bgColor: "bg-green-500/10",
         color: "text-green-500",
@@ -44,25 +37,17 @@ const SummaryCard = ({ courses }: SummaryCardProps) => {
       },
     },
     {
-      title: "Đã huỷ",
+      title: "Từ chối",
       content: canceled,
       className: {
         bgColor: "bg-red-500/10",
         color: "text-red-500",
       },
     },
-    {
-      title: "Tổng doanh thu",
-      content: `${formatCurrency(totalRevenue)} vnd`,
-      className: {
-        bgColor: "bg-sky-500/10",
-        color: "text-blue",
-      },
-    },
   ];
 
   return (
-    <div className="mt-20 grid grid-cols-2 gap-4 lg:grid-cols-4 ">
+    <div className="mt-20 grid grid-cols-2 gap-4 lg:grid-cols-3 ">
       {SummaryCardItem.map((item) => (
         <div
           key={item.title}
@@ -89,4 +74,4 @@ const SummaryCard = ({ courses }: SummaryCardProps) => {
   );
 };
 
-export default SummaryCard;
+export default CommentSummary;

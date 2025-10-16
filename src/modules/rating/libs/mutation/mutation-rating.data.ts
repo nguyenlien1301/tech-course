@@ -49,6 +49,9 @@ export function useMutationUpdateRating() {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_RATING],
         });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_RATING_SUMMARY],
+        });
         toast.success("Cập nhật đánh giá thành công");
       }
     },
