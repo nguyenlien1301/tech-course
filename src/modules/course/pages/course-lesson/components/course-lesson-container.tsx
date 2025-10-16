@@ -45,7 +45,7 @@ const CourseLessonContainer = async ({
         <Suspense fallback={<Loading />}>
           <CourseLessonComment
             courseId={courseId}
-            lessonSlug={searchParams.slug}
+            lessonId={lessonId}
             sort={searchParams.sort}
           />
         </Suspense>

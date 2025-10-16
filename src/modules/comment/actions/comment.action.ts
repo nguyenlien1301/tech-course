@@ -59,13 +59,13 @@ export async function fetchComments(params: QueryFilter): Promise<
 
 // getCommentByLesson: lấy comment theo bài học
 export async function getCommentByLesson(
-  lessonId: string,
+  lessonIdString: string,
   sort: QuerySortFilter,
 ): Promise<CommentItemData[] | undefined> {
   try {
     connectToDatabase();
     const comments = await CommentModel.find<CommentItemData>({
-      lesson: lessonId,
+      lesson: lessonIdString,
     })
       .populate({
         path: "user",

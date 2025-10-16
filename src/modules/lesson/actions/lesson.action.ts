@@ -10,16 +10,17 @@ import { Lesson } from "@/shared/types/models";
 // lesson slug có thể trùng nhau vì vậy phải tìm theo course khoá học nữa thì mới chuẩn xác
 export async function getLessonBySlug({
   course,
-  slug,
+  lessonId,
 }: {
   course: string;
-  slug: string;
+  lessonId: string;
 }): Promise<Lesson | undefined> {
   try {
     connectToDatabase();
-    const findLesson = await LessonModel.findOne({ slug, course }).select(
-      "title video_url content",
-    );
+    const findLesson = await LessonModel.findOne({
+      _id: lessonId,
+      course,
+    }).select("title video_url content");
 
     return JSON.parse(JSON.stringify(findLesson));
   } catch (error) {

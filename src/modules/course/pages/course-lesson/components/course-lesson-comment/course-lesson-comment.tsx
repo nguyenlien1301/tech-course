@@ -8,25 +8,25 @@ import CommentSorting from "./comment-sorting";
 
 interface CourseLessonCommentProps {
   courseId: string;
-  lessonSlug: string;
+  lessonId: string;
   sort: QuerySortFilter;
 }
 
 const CourseLessonComment = async ({
   courseId,
-  lessonSlug,
+  lessonId,
   sort,
 }: CourseLessonCommentProps) => {
   const lesson = await getLessonBySlug({
-    slug: lessonSlug,
+    lessonId: lessonId,
     course: courseId,
   });
 
-  const lessonId = lesson?._id.toString();
+  const lessonIdString = lesson?._id.toString();
 
-  if (!lessonId) return null;
+  if (!lessonIdString) return null;
   //   Danh sách comments
-  const comments = await getCommentByLesson(lessonId, sort);
+  const comments = await getCommentByLesson(lessonIdString, sort);
 
   const commentLessonId = lesson?._id.toString() || "";
 
