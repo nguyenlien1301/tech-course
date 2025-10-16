@@ -14,7 +14,7 @@ import { UserRole } from "@/shared/constants";
 const layout = async ({ children }: { children: React.ReactNode }) => {
   const { userId } = await auth();
 
-  const userInfo = await getUserInfo({ userId });
+  const userInfo = await getUserInfo({ userId: userId! });
 
   return (
     <LayoutWrapper>
