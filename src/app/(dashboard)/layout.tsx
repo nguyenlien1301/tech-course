@@ -6,6 +6,7 @@ import LayoutWrapper from "@/shared/components/common/layout-wrapper";
 import {
   Header,
   MenuMobile,
+  MenuMobileUser,
   Sidebar,
   SidebarUser,
 } from "@/shared/components/layout";
@@ -15,15 +16,30 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
   const { userId } = await auth();
 
   if (!userId) {
-    return redirect("/sign-in");
+    return redirect("/");
   }
 
   const userInfo = await getUserInfo({ userId });
 
   return (
     <LayoutWrapper>
-      {userInfo?.role === UserRole.USER && <SidebarUser />}
-      {userInfo?.role === UserRole.ADMIN && <Sidebar />}
+      {!userId && (
+        <>
+          <SidebarUser />
+          <MenuMobileUser />
+        </>
+      )}
+      {userInfo?.role === UserRole.ADMIN ? (
+        <>
+          <Sidebar />
+          <MenuMobile />
+        </>
+      ) : (
+        <>
+          <SidebarUser />
+          <MenuMobileUser />
+        </>
+      )}
       <MenuMobile />
       <div className="hidden lg:block" />
       <main className="px-5 pb-20 pt-[100px] lg:pb-10">

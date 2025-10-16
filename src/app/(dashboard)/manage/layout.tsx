@@ -12,7 +12,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   const { userId } = await auth();
 
   // Nếu ko có userId thì sẽ path qua trang đăg nhập yêu cầu ng dùng đăg nhập
-  if (!userId) return redirect("/sign-in");
+  if (!userId) return redirect("/");
   // userInfo: để lấy thông tin user về thông qua hàm getUserInfo và truyền vào userId
   const userInfo = await getUserInfo({ userId });
 
