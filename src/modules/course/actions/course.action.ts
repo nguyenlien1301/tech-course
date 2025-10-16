@@ -209,6 +209,8 @@ export async function fetchAllCoursesPublic(
       .limit(limit)
       .sort({ created_at: -1 });
 
+    console.log("🚀courses---->", courses);
+
     return JSON.parse(JSON.stringify(courses));
   } catch (error) {
     console.log("🚀error function fetchAllCoursesPublic ---->", error);

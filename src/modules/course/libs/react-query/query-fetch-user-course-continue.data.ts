@@ -17,8 +17,6 @@ export const useQueryFetchUserCoursesContinue = ({
     queryFn: async () => {
       const hasResult = await fetchUserCoursesContinue({ clerkId });
 
-      console.log("🚀hasResult---->", hasResult);
-
       return hasResult || [];
     },
     placeholderData: keepPreviousData, // data tạm.

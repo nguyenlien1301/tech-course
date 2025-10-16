@@ -12,6 +12,8 @@ const CourseSuggestion = () => {
   });
   const courseList = data || [];
 
+  console.log("🚀courseList---->", courseList);
+
   return (
     <div className="flex flex-col">
       <Heading className="lg:text-xl">Đề xuất</Heading>

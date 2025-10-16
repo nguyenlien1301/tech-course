@@ -20,7 +20,6 @@ const CourseDashboardContainer = () => {
           </div>
         </div>
       </div>
-
       <CourseContinue />
       <CourseSuggestion />
     </div>
