@@ -123,6 +123,7 @@ export async function updateOrder({
         select: "_id",
       });
 
+    console.log("🚀 findOrder---->", findOrder);
     if (!findOrder) return;
     // Kiếm tra nếu findOrder.status bằng với OrderStatus.CANCELED thì dừng chương trình.
     if (findOrder.status === OrderStatus.CANCELED) return;

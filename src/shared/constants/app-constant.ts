@@ -41,7 +41,7 @@ export const editorOptions = (field: any, theme: any) => ({
 export const lastLessonKey = "lastLesson";
 export const allValue = "All";
 // ITEM_PER_PAGE: này là tổng số item sẽ hiển thị
-export const ITEM_PER_PAGE = 1;
+export const ITEM_PER_PAGE = 5;
 export const MAX_COMMENT_LEVEL = 3;
 export const COMMENT_SPACING = 65;
 
