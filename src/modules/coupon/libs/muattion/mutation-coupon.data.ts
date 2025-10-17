@@ -35,6 +35,7 @@ export function useMutationCreateCoupon() {
     },
   });
 }
+
 export function useMutationUpdateCoupon() {
   const queryClient = getQueryClient();
   const router = useRouter();

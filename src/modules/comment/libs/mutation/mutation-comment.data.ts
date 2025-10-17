@@ -24,6 +24,9 @@ export function useMutationCreateComment() {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_COMMENTS],
         });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_COMMENT_LESSON],
+        });
       }
     },
     onError: () => {
@@ -56,6 +59,9 @@ export function useMutationUpdateComment() {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_COMMENT_SUMMARY],
         });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_COMMENT_LESSON],
+        });
       }
     },
     onError: () => {
@@ -78,6 +84,9 @@ export function useMutationDeleteComment() {
       if (response) {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_COMMENTS],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_COMMENT_LESSON],
         });
       }
     },

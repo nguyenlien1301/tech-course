@@ -8,11 +8,14 @@ import { handleGetStorageLesson } from "@/shared/helper";
 
 const CourseContinue = () => {
   const { userInfo } = useUserContext();
+
   const { data, isLoading } = useQueryFetchUserCoursesContinue({
     clerkId: userInfo?.clerkId || "",
   });
+
   const courseList = data || [];
 
+  console.log("🚀courseList---->", courseList);
   // if (isLoading && courseList.length === 0)
   //   return <EmptyData text="Bạn chưa có khoá học nào" />;
 

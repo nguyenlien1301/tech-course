@@ -44,6 +44,9 @@ export function useMutationUpdateOrder() {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_ORDER_SUMMARY],
         });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.FETCH_USER_COURSES],
+        });
       }
     },
 

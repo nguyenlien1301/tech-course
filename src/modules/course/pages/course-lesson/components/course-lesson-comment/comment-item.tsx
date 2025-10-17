@@ -54,6 +54,7 @@ const CommentItem = ({
   //       )}
   const COMMENT_SPACING = 55;
   const isPending = comment.status === CommentStatus.PENDING;
+  const isPendings = comment.status === CommentStatus.CANCELED;
 
   return (
     <>
@@ -62,7 +63,7 @@ const CommentItem = ({
         className={cn(
           "flex items-start gap-3 p-3 rounded-xl border borderDarkMode bgDarkMode shadow-sm ml-auto",
           {
-            "opacity-50 pointer-events-none": isPending,
+            "opacity-50 pointer-events-none": isPending || isPendings,
             "mt-5 first:mt-0": level === 0,
           },
         )}

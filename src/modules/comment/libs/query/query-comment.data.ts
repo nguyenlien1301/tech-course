@@ -1,9 +1,13 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/shared/constants";
-import { QueryFilter } from "@/shared/types";
+import { QueryFilter, QuerySortFilter } from "@/shared/types";
 
-import { fetchComments, fetchCommentSummary } from "../../actions";
+import {
+  fetchComments,
+  fetchCommentSummary,
+  getCommentByLesson,
+} from "../../actions";
 
 interface QueryFetchCommentProps extends QueryFilter {}
 
@@ -23,6 +27,17 @@ export const useQueryFetchComment = (props: QueryFetchCommentProps) => {
     },
     placeholderData: keepPreviousData, // data tạm.
     refetchOnWindowFocus: true,
+  });
+};
+
+export const useQueryGetCommentByLesson = (
+  lessonId: string,
+  sort: QuerySortFilter,
+) => {
+  return useQuery({
+    enabled: !!lessonId, // chỉ fetch khi có lessonId
+    queryKey: [QUERY_KEYS.FETCH_COMMENT_LESSON, lessonId],
+    queryFn: () => getCommentByLesson(lessonId, sort),
   });
 };
 

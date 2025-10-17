@@ -1,5 +1,6 @@
-import { getCommentByLesson } from "@/modules/comment/actions";
-import { getLessonBySlug } from "@/modules/lesson/actions";
+"use client";
+import { useQueryGetCommentByLesson } from "@/modules/comment/libs";
+import { useQueryGetLessonBySlug } from "@/modules/lesson/libs";
 import { QuerySortFilter } from "@/shared/types";
 
 import CommentForm from "./comment-form";
@@ -12,22 +13,16 @@ interface CourseLessonCommentProps {
   sort: QuerySortFilter;
 }
 
-const CourseLessonComment = async ({
+const CourseLessonComment = ({
   courseId,
   lessonId,
   sort,
 }: CourseLessonCommentProps) => {
-  const lesson = await getLessonBySlug({
-    lessonId: lessonId,
-    course: courseId,
-  });
+  const { data: lesson } = useQueryGetLessonBySlug(courseId, lessonId);
+  const lessonIdString = lesson?._id.toString() || "";
+  const { data: comments } = useQueryGetCommentByLesson(lessonIdString, sort);
 
-  const lessonIdString = lesson?._id.toString();
-
-  if (!lessonIdString) return null;
   //   Danh sách comments
-  const comments = await getCommentByLesson(lessonIdString, sort);
-
   const commentLessonId = lesson?._id.toString() || "";
 
   //   rootComments: tức là sẽ lấy các comment level 0 trước sau đó map ra ở commentItem. trong comment Item sẽ truyền vào một comments và viết function là getRepliesComment. cái getRepliesComment truyền vào một comments list ban đầu cả comment level 0 luôn và sẽ filter và khi nó chạy như vậy thì lần đầu nó sẽ ko có vì nó chưa chạy đệ quy hết tại nó phải so sánh từng thằng với nhau thì mới lấy ra đc.

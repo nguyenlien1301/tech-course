@@ -43,6 +43,27 @@ export const useQueryGetCouponCode = (code: string) => {
   });
 };
 
+// export const useQueryValidateCoupon = ({
+//   code,
+//   courseId,
+// }: {
+//   code: string;
+//   courseId: string;
+// }) => {
+//   return useQuery({
+//     queryKey: [QUERY_KEYS.GET_COUPON_CODE, code, courseId],
+//     queryFn: async () => {
+//       if (!code || !courseId) return;
+//       const result = await getValidateCoupon({ code, courseId });
+
+//       return result;
+//     },
+//     enabled: !!code && !!courseId, // chỉ fetch khi có cả code và courseId
+//     placeholderData: keepPreviousData,
+//     refetchOnWindowFocus: false,
+//   });
+// };
+
 export const useQueryFetchCouponSummary = () => {
   return useQuery({
     enabled: true,
