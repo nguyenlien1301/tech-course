@@ -2,8 +2,9 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/shared/constants";
 import { QueryFilter } from "@/shared/types";
+import { User } from "@/shared/types/models";
 
-import { fetchUsers, fetchUserSummary } from "../../actions";
+import { fetchUsers, fetchUserSummary, getUserInfo } from "../../actions";
 
 interface QueryFetchUserProps extends QueryFilter {}
 
@@ -37,5 +38,13 @@ export const useQueryFetchUserSummary = () => {
     },
     placeholderData: keepPreviousData, // data tạm.
     refetchOnWindowFocus: true,
+  });
+};
+
+export const useQueryFetchUserInfo = (userId: string) => {
+  return useQuery<User | null | undefined>({
+    queryKey: [QUERY_KEYS.FETCH_USER, userId],
+    queryFn: async () => await getUserInfo({ userId }),
+    enabled: !!userId, // chỉ fetch khi có userId
   });
 };

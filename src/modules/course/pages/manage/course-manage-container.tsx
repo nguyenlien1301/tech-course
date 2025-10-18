@@ -8,10 +8,6 @@ import Swal from "sweetalert2";
 import { deleteCourse, updateCourse } from "@/modules/course/actions";
 import SkeletonTableRows from "@/modules/course/components/skeleton-table-rows";
 import {
-  useQueryFetchCourses,
-  useQueryFetchCoursesSummary,
-} from "@/modules/course/libs/react-query";
-import {
   BadgeStatus,
   BouncedLink,
   EmptyData,
@@ -41,6 +37,7 @@ import { formatCurrency, formatDate } from "@/shared/helper";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
+import { useQueryFetchCourses, useQueryFetchCoursesSummary } from "../../libs";
 import CourseSummary from "./components/course-summary";
 
 const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {

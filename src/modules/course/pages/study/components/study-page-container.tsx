@@ -1,16 +1,20 @@
 "use client";
 
 import CourseItem from "@/modules/course/components";
+import { useQueryFetchCourseOfUser } from "@/modules/course/libs";
 import { CourseGrid } from "@/shared/components/common";
+import { useUserContext } from "@/shared/contexts";
 import { handleGetStorageLesson } from "@/shared/helper";
-import { CourseItemData } from "@/shared/types";
 
-interface StudyPageContainerProps {
-  courses: CourseItemData[];
-}
-const StudyPageContainer = ({ courses }: StudyPageContainerProps) => {
+const StudyPageContainer = () => {
+  const { userInfo } = useUserContext();
+
+  const { data: courses, isLoading } = useQueryFetchCourseOfUser(
+    userInfo?.clerkId || "",
+  );
+
   return (
-    <CourseGrid>
+    <CourseGrid isLoading={isLoading} userId={!userInfo?.clerkId}>
       {!!courses &&
         courses.length > 0 &&
         courses.map((course, index) => {

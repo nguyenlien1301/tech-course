@@ -127,7 +127,6 @@ export async function deleteRating(id: string): Promise<boolean | undefined> {
 export async function getRatingByUserId(
   userId: string,
 ): Promise<boolean | undefined> {
-  console.log("🚀userId---->", userId);
   try {
     connectToDatabase();
     const findRating = await RatingModel.findOne({ user: userId });

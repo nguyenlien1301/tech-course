@@ -1,49 +1,60 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 
 import PageNotFound from "@/app/not-found";
-import { getCourseLessonInfo } from "@/modules/course/actions";
+import {
+  useQueryFetchCourseBySlug,
+  useQueryFetchCourseLessonInfo,
+} from "@/modules/course/libs";
+import { SpinerLoading } from "@/shared/components/common";
 import { CourseOutline } from "@/shared/components/course";
-import { CourseStatus } from "@/shared/constants";
+import { Courselevel, CourseStatus } from "@/shared/constants";
 import { courseLevelTitle } from "@/shared/constants/course-constant";
 import { formatMinutesToHour, formatNumberToK } from "@/shared/helper";
-import { CourseItemData } from "@/shared/types";
 import { CourseLessonData, CourseQAData } from "@/shared/types/course.type";
 
-import BenefitItem from "./benefit-item";
-import CourseWidget from "./course-widget";
-import QaItem from "./qa-item";
-import RatingItem from "./rating-item";
-import RequirementItem from "./requirement-item";
-import SectionInfoItem from "./section-info-item";
-import SectionItem from "./section-item";
+import BenefitItem from "./components/benefit-item";
+import CourseWidget from "./components/course-widget";
+import QaItem from "./components/qa-item";
+import RatingItem from "./components/rating-item";
+import RequirementItem from "./components/requirement-item";
+import SectionInfoItem from "./components/section-info-item";
+import SectionItem from "./components/section-item";
 
-interface CourseDetailsContainerProps {
-  courseDetails: CourseItemData | undefined;
-  userId?: string | null;
-}
-const CourseDetailsContainer = async ({
-  courseDetails,
-}: CourseDetailsContainerProps) => {
+const CourseDetailsContainer = ({ slug }: { slug: string }) => {
+  const { data: courseDetails, isLoading: isCourseLoading } =
+    useQueryFetchCourseBySlug(slug);
+
+  const { data: lessonInfo = {} as CourseLessonData } =
+    useQueryFetchCourseLessonInfo(slug) || {
+      duration: 0,
+      lessons: 0,
+    };
+
+  if (isCourseLoading) {
+    return <SpinerLoading />;
+  }
+
   const isEmptyData =
     !courseDetails || courseDetails.status !== CourseStatus.APPROVED;
 
   if (isEmptyData) return <PageNotFound />;
 
-  const lessonInfo: CourseLessonData = (await getCourseLessonInfo({
-    slug: courseDetails.slug,
-  })) || { duration: 0, lessons: 0 };
+  // const lessonInfo: CourseLessonData = (await getCourseLessonInfo({
+  //   slug: courseDetails.slug,
+  // })) || { duration: 0, lessons: 0 };
   //videoId:  .split("v="): Tách chuỗi URL thành mảng bằng cách dùng "v=" làm dấu cắt.
   //videoId: [1]: lấy phần sau dấu v=, chính là videoId.
   const videoId = courseDetails.intro_url?.split("v=")[1];
   const ratings = courseDetails.rating.map((item) => item.content);
-  const requirements = courseDetails.info.requirements || [];
-  const benefits = courseDetails.info.benefits || [];
+  const requirements = courseDetails.info?.requirements || [];
+  const benefits = courseDetails.info?.benefits || [];
   const questionAnswers = courseDetails.info.qa || [];
   const courseDetailsMeta: { title: string; content: React.ReactNode }[] = [
     {
       title: "Bài học",
-      content: lessonInfo.lessons,
+      content: lessonInfo?.lessons,
     },
     {
       title: "Lượt xem",
@@ -51,7 +62,7 @@ const CourseDetailsContainer = async ({
     },
     {
       title: "Trình độ",
-      content: courseLevelTitle[courseDetails.level],
+      content: courseLevelTitle[courseDetails.level as Courselevel],
     },
     {
       title: "Thời lượng",

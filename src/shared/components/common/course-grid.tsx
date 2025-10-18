@@ -6,11 +6,13 @@ import CourseItemSkeleton from "@/modules/course/components/course-item-skeleton
 const CourseGrid = ({
   children,
   isLoading,
+  userId,
 }: {
   children: React.ReactNode;
   isLoading?: boolean;
+  userId?: boolean;
 }) => {
-  if (isLoading) {
+  if (isLoading || userId) {
     return (
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 lg:gap-8">
         {Array.from({ length: 3 })

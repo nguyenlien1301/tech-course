@@ -32,6 +32,9 @@ export { default as IconReply } from "./icon-reply";
 export { default as IconSearch } from "./icon-search";
 export { default as IconStar } from "./icon-star";
 export { default as IconStudy } from "./icon-study";
+export {
+  default as IconUserCircle,
+  default as IconVideo,
+} from "./icon-user-circle";
 export { default as IconUsers } from "./icon-users";
 export { default as IconUturn } from "./icon-uturn";
-export { default as IconVideo } from "./icon-video";

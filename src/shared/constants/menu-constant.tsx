@@ -7,6 +7,7 @@ import {
   IconOrder,
   IconStar,
   IconStudy,
+  IconUserCircle,
   IconUsers,
 } from "../components/icons";
 import { MenuField } from "../types";
@@ -57,6 +58,11 @@ export const menuItems: MenuField[] = [
     title: "Quản lý bình luận",
     icon: <IconComment className="shirk-0 size-6" />,
   },
+  {
+    url: "/profile",
+    title: "Profile",
+    icon: <IconUserCircle className="shirk-0 size-6" />,
+  },
 ];
 
 export const menuItemUser: MenuField[] = [
@@ -74,5 +80,10 @@ export const menuItemUser: MenuField[] = [
     url: "/study",
     title: "Khu vực học tập",
     icon: <IconStudy className="shirk-0 size-6" />,
+  },
+  {
+    url: "/profile",
+    title: "Profile",
+    icon: <IconUserCircle className="shirk-0 size-6" />,
   },
 ];

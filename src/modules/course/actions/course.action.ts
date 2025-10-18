@@ -108,7 +108,7 @@ export async function fetchCourseBySlug({
 
     return JSON.parse(JSON.stringify(findCourse)) as CourseItemData;
   } catch (error) {
-    console.log("🚀error function getCourseInfo ---->", error);
+    console.log("🚀error function fetchCourseBySlug ---->", error);
   }
 }
 
@@ -235,6 +235,7 @@ export async function fetchCourseOfUser(
       },
     });
 
+    console.log("🚀findUser---->", findUser);
     if (!findUser) return;
 
     return JSON.parse(JSON.stringify(findUser.courses));
@@ -297,6 +298,7 @@ export async function updateCourse(params: UpdateCourseParams) {
     console.log("🚀error function updateCourse ---->", error);
   }
 }
+
 export async function deleteCourse(slug: string) {
   try {
     connectToDatabase();
@@ -341,7 +343,7 @@ export async function getCourseLessonInfo({
   slug,
 }: {
   slug: string;
-}): Promise<CourseLessonData | undefined> {
+}): Promise<CourseLessonData | undefined | null> {
   try {
     connectToDatabase();
     // course: này là thông tin của khoá học lấy theo slug,

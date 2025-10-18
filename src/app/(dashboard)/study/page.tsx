@@ -1,15 +1,11 @@
-import { Suspense } from "react";
-
-import { StudyPage } from "@/modules/course/pages";
+import StudyPageContainer from "@/modules/course/pages/study/components";
 import { Heading } from "@/shared/components/common";
 
 const StudyPageRoot = () => {
   return (
     <div>
       <Heading>Khu vực học tập</Heading>
-      <Suspense>
-        <StudyPage />
-      </Suspense>
+      <StudyPageContainer />
     </div>
   );
 };

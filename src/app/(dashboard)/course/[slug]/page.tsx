@@ -1,4 +1,4 @@
-import { CourseDetailsPage } from "@/modules/course/pages";
+import { CourseDetailsContainer } from "@/modules/course/pages";
 
 const CourseDetailPagaRoot = ({
   params,
@@ -7,7 +7,7 @@ const CourseDetailPagaRoot = ({
     slug: string;
   };
 }) => {
-  return <CourseDetailsPage slug={params.slug} />;
+  return <CourseDetailsContainer slug={params.slug} />;
 };
 
 export default CourseDetailPagaRoot;

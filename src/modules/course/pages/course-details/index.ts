@@ -1,1 +1,1 @@
-export { default as CourseDetailsPage } from "./course-details-page";
+export { default as CourseDetailsContainer } from "./course-details-container";

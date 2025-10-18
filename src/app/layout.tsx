@@ -10,7 +10,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
-import { ThemeProvider } from "@/shared/components/common";
+import { SpinerLoading, ThemeProvider } from "@/shared/components/common";
 import { SidebarContextProvider, UserContextProvider } from "@/shared/contexts";
 import ReactQueryContext from "@/shared/contexts/react-query-context";
 
@@ -57,14 +57,14 @@ export default function RootLayout({
                     <NextTopLoader
                       color="#29D"
                       crawl={true}
-                      crawlSpeed={200}
+                      crawlSpeed={100}
                       easing="ease"
                       height={5}
                       initialPosition={0.08}
                       showSpinner={false}
                       speed={200}
                     />
-                    <Suspense>{children}</Suspense>
+                    <Suspense fallback={<SpinerLoading />}>{children}</Suspense>
                   </NuqsAdapter>
                 </SidebarContextProvider>
               </UserContextProvider>

@@ -7,6 +7,8 @@ const StudyPage = async () => {
   const { userId } = await auth();
   const courses = (await fetchCourseOfUser(userId || "")) || [];
 
+  console.log("🚀userId---->", userId);
+
   return <StudyPageContainer courses={courses} />;
 };
 
