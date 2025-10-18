@@ -1,4 +1,4 @@
-import StudyPageContainer from "@/modules/course/pages/study/components";
+import { StudyPageContainer } from "@/modules/course/pages";
 import { Heading } from "@/shared/components/common";
 
 const StudyPageRoot = () => {

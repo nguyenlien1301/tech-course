@@ -1,1 +1,1 @@
-export { default as StudyPage } from "./study-page";
+export { default as StudyPageContainer } from "./study-page-container";
