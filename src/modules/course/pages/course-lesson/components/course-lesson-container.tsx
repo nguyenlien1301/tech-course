@@ -21,7 +21,9 @@ const CourseLessonContainer = async ({
   const courseSlug = params.course;
   const lessonId = searchParams.id;
 
+  console.log("🚀lessonId---->", lessonId);
   if (!courseSlug || !lessonId) return <PageNotFound />;
+  if (lessonId === "undefined") return <PageNotFound />;
   //   Tìm course vì trong khoá học ko có lưu course mà là lưu objectId
   const findCourse = await fetchCourseBySlug({ slug: courseSlug });
 

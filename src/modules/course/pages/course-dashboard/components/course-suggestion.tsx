@@ -1,6 +1,6 @@
 "use client";
 
-import CourseItem from "@/modules/course/components";
+import { CourseItem } from "@/modules/course/components";
 import { useQueryFetchCoursesPublic } from "@/modules/course/libs";
 import { CourseGrid, Heading } from "@/shared/components/common";
 import { CourseStatus } from "@/shared/constants";

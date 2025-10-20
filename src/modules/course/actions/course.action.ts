@@ -191,6 +191,7 @@ export async function fetchAllCoursesPublic(
     if (option === CourseOptions.FREE) {
       query.price = 0;
     }
+    console.log("🚀option---->", option);
     // Latest (trong vòng 15 ngày gần nhất)
     if (option === CourseOptions.LATEST) {
       const now = new Date();
@@ -287,8 +288,6 @@ export async function updateCourse(params: UpdateCourseParams) {
         new: true,
       },
     );
-    // revalidatePath: khi cập nhật truyền trang muốn reload lại ra giao diện
-    revalidatePath("/");
 
     return {
       success: true,

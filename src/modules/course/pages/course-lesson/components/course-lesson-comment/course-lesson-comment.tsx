@@ -22,6 +22,7 @@ const CourseLessonComment = ({
   const lessonIdString = lesson?._id.toString() || "";
   const { data: comments } = useQueryGetCommentByLesson(lessonIdString, sort);
 
+  if (!lessonIdString) return null;
   //   Danh sách comments
   const commentLessonId = lesson?._id.toString() || "";
 

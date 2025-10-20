@@ -4,9 +4,15 @@ import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 import { UserStatus } from "@/shared/constants";
+import { parseData } from "@/shared/helper";
 import { connectToDatabase } from "@/shared/lib";
 import { UserModel } from "@/shared/schemas";
-import { CreateUserParams, QueryFilter, UserItemData } from "@/shared/types";
+import {
+  CreateUserParams,
+  QueryFilter,
+  UpdateProfileUserParams,
+  UserItemData,
+} from "@/shared/types";
 import { User } from "@/shared/types/models";
 
 export async function fetchUserSummary() {
@@ -95,6 +101,35 @@ export async function getUserInfo({
     return JSON.parse(JSON.stringify(findUser));
   } catch (error) {
     console.log("🚀error function getUserInfo ---->", error);
+  }
+}
+
+export async function updateProfileUser({
+  updateData,
+  userId,
+}: {
+  userId: string;
+  updateData: UpdateProfileUserParams;
+}) {
+  try {
+    await connectToDatabase();
+
+    // Tìm user theo clerkId
+    const findUser = await UserModel.findOne({ clerkId: userId });
+
+    if (!findUser) return null;
+
+    // Cập nhật profile
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { clerkId: userId }, // điều kiện
+      { $set: updateData }, // chỉ update các trường được gửi lên
+      { new: true }, // trả về document sau khi update
+    );
+
+    return parseData(updatedUser);
+  } catch (error) {
+    console.log("🚀error updateProfileUser ---->", error);
+    throw error;
   }
 }
 

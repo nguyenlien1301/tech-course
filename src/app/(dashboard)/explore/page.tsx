@@ -1,5 +1,8 @@
-const page = () => {
-  return <div>Khám phá</div>;
+import { ExplorePageContainer } from "@/modules/course/pages";
+import { QuerySearchParams } from "@/shared/types";
+
+const ExplorePageRoot = ({ searchParams }: QuerySearchParams) => {
+  return <ExplorePageContainer searchParams={searchParams} />;
 };
 
-export default page;
+export default ExplorePageRoot;

@@ -1,6 +1,7 @@
 export * from "./comment.model";
 export * from "./coupon.model";
 export * from "./course.model";
+export * from "./favorite.model";
 export * from "./history.model";
 export * from "./lecture.model";
 export * from "./lesson.model";

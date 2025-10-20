@@ -46,7 +46,7 @@ const CourseGridContinue = ({
             >
               <div className="aspect-square h-32 animate-pulse rounded-lg bg-gray-200" />
               <div className="flex flex-1 flex-col">
-                <div className="mb-3 h-6 w-96 animate-pulse rounded-lg bg-gray-200" />
+                <div className="mb-3 h-6 max-w-96 animate-pulse rounded-lg bg-gray-200" />
                 <div className="h-5 w-52 animate-pulse rounded-lg bg-gray-200" />
                 <div className="ml-auto mt-auto h-10 w-32 animate-pulse rounded-lg bg-gray-200" />
               </div>

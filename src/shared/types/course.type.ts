@@ -17,7 +17,6 @@ export type UpdateCourseParams = {
   // Course: Là những cái trong course model có thể cập nhật đc
   // Partial: biến tất cả trong Course là ko bắt buộc
   updateData: Partial<Course>;
-  path?: string;
 };
 export interface CourseQAData {
   question: string;

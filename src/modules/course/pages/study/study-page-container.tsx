@@ -1,10 +1,11 @@
 "use client";
 
-import CourseItem from "@/modules/course/components";
 import { useQueryFetchCourseOfUser } from "@/modules/course/libs";
 import { CourseGrid } from "@/shared/components/common";
 import { useUserContext } from "@/shared/contexts";
 import { handleGetStorageLesson } from "@/shared/helper";
+
+import { CourseItem } from "../../components";
 
 const StudyPageContainer = () => {
   const { userInfo } = useUserContext();

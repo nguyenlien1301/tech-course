@@ -162,3 +162,31 @@
     @apply px-6 py-2 text-sm;
   }
 }
+
+.Toastify__toast-container {
+  .Toastify__toast {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-height: auto;
+    font-size: 14px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  .Toastify__toast-icon {
+    width: 17px;
+  }
+  .Toastify__toast--info {
+    border: 1px solid #3498db; /* xanh dương */
+  }
+
+  .Toastify__toast--success {
+    border: 1px solid #2ecc71; /* xanh lá */
+  }
+
+  .Toastify__toast--error {
+    border: 1px solid #e74c3c; /* đỏ */
+  }
+
+  .Toastify__toast--warning {
+    border: 1px solid #f39c12; /* vàng */
+  }
+}

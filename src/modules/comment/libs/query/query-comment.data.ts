@@ -26,7 +26,6 @@ export const useQueryFetchComment = (props: QueryFetchCommentProps) => {
       };
     },
     placeholderData: keepPreviousData, // data tạm.
-    refetchOnWindowFocus: true,
   });
 };
 

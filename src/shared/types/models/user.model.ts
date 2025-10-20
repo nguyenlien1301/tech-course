@@ -8,6 +8,8 @@ export interface User extends Document {
   name: string;
   username: string;
   email: string;
+  phone: string;
+  bio: string;
   courses: Schema.Types.ObjectId[]; // Lưu các khoá học mà user đã mua
   avatar: string;
   status: UserStatus; // Trạng thái user

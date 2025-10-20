@@ -34,7 +34,6 @@ export function useMutationUpdateCourse() {
   const queryClient = getQueryClient();
 
   return useMutation({
-    mutationKey: [QUERY_KEYS.UPDATE_COURSE],
     mutationFn: async (data: UpdateCourseParams) => {
       const response = await updateCourse(data);
 

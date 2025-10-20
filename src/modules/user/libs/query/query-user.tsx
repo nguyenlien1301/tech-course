@@ -43,7 +43,7 @@ export const useQueryFetchUserSummary = () => {
 
 export const useQueryFetchUserInfo = (userId: string) => {
   return useQuery<User | null | undefined>({
-    queryKey: [QUERY_KEYS.FETCH_USER, userId],
+    queryKey: [QUERY_KEYS.FETCH_USER_INFO, userId],
     queryFn: async () => await getUserInfo({ userId }),
     enabled: !!userId, // chỉ fetch khi có userId
   });

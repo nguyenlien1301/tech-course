@@ -38,7 +38,6 @@ export function useMutationUpdateComment() {
   const queryClient = getQueryClient();
 
   return useMutation({
-    mutationKey: [QUERY_KEYS.UPDATE_COMMENT],
     mutationFn: async ({
       commentId,
       status,

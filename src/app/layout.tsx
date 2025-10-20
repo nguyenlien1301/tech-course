@@ -71,7 +71,11 @@ export default function RootLayout({
             </ReactQueryContext>
             <SpeedInsights />
             <Analytics />
-            <ToastContainer autoClose={2000} draggable />
+            <ToastContainer
+              autoClose={2000}
+              draggable
+              position="bottom-right"
+            />
           </ThemeProvider>
         </body>
       </html>

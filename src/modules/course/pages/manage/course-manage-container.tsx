@@ -5,7 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-import { deleteCourse, updateCourse } from "@/modules/course/actions";
+import { deleteCourse } from "@/modules/course/actions";
 import SkeletonTableRows from "@/modules/course/components/skeleton-table-rows";
 import {
   BadgeStatus,
@@ -37,12 +37,17 @@ import { formatCurrency, formatDate } from "@/shared/helper";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
-import { useQueryFetchCourses, useQueryFetchCoursesSummary } from "../../libs";
+import {
+  useMutationUpdateCourse,
+  useQueryFetchCourses,
+  useQueryFetchCoursesSummary,
+} from "../../libs";
 import CourseSummary from "./components/course-summary";
 
 const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
   const { handleSearchData, handleSelectStatus, handleSetDefaultStatus } =
     useQueryString();
+  const mutationUpdateCourse = useMutationUpdateCourse();
   const { data, isFetching } = useQueryFetchCourses({
     page: searchParams.page || 1,
     limit: ITEM_PER_PAGE,
@@ -66,7 +71,7 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
         cancelButtonText: "Huỷ",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          await updateCourse({
+          await mutationUpdateCourse.mutateAsync({
             slug,
             updateData: {
               status:
@@ -75,13 +80,12 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
                   : CourseStatus.PENDING,
               _destroy: true,
             },
-            path: "/manage/course",
           });
-          toast.success("Xoá khoá học thành công");
+          toast.success("Huỷ khoá học thành công");
         }
       });
     } catch (error) {
-      console.log("🚀error handleDeleteCourse ---->", error);
+      console.log("🚀error handleCancleCourse ---->", error);
     }
   };
   //   function đổi trang thái khoá học
@@ -97,7 +101,7 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
         cancelButtonText: "Huỷ",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          await updateCourse({
+          await mutationUpdateCourse.mutateAsync({
             slug,
             updateData: {
               status:
@@ -106,7 +110,6 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
                   : CourseStatus.PENDING,
               _destroy: false,
             },
-            path: "/manage/course",
           });
           toast.success("Cập nhật trạng thái thành công");
         }
@@ -115,7 +118,7 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
       console.log("🚀error handleChangeStatus ---->", error);
     }
   };
-  const handleDeleteStatus = (slug: string) => {
+  const handleDeleteCourse = (slug: string) => {
     try {
       Swal.fire({
         title: "Bạn có xoá khoá học này không?",
@@ -265,7 +268,7 @@ const CourseManageContainer = ({ searchParams }: QuerySearchParams) => {
                       {course.status === CourseStatus.REJECTED && (
                         <TableActionItem
                           type="delete"
-                          onClick={() => handleDeleteStatus(course.slug)}
+                          onClick={() => handleDeleteCourse(course.slug)}
                         />
                       )}
                     </TableAction>

@@ -73,6 +73,7 @@ function ProfilePageContainer() {
                   </Label>
                   <Input
                     className="border-0 bg-gray-50"
+                    disabled
                     readOnly
                     value={data?.username}
                   />
@@ -94,14 +95,22 @@ function ProfilePageContainer() {
                   <Label className="mb-2 block text-sm text-gray-600">
                     Phone
                   </Label>
-                  <Input className="border-0 bg-gray-50" readOnly value="" />
+                  <Input
+                    className="border-0 bg-gray-50"
+                    readOnly
+                    value={data?.phone}
+                  />
                 </div>
 
                 <div className="md:col-span-2">
                   <Label className="mb-2 block text-sm text-gray-600">
                     Bio
                   </Label>
-                  <Input className="border-0 bg-gray-50" readOnly value="" />
+                  <Input
+                    className="border-0 bg-gray-50"
+                    readOnly
+                    value={data?.bio}
+                  />
                 </div>
               </div>
             </div>

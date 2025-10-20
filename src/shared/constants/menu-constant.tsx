@@ -1,3 +1,5 @@
+import { Heart } from "lucide-react";
+
 import {
   IconComment,
   IconDiscover,
@@ -27,6 +29,11 @@ export const menuItems: MenuField[] = [
     url: "/study",
     title: "Khu vực học tập",
     icon: <IconStudy className="shirk-0 size-6" />,
+  },
+  {
+    url: "/favorite",
+    title: "Yêu thích",
+    icon: <Heart className="shirk-0 size-6" />,
   },
   {
     url: "/manage/course",
@@ -80,6 +87,11 @@ export const menuItemUser: MenuField[] = [
     url: "/study",
     title: "Khu vực học tập",
     icon: <IconStudy className="shirk-0 size-6" />,
+  },
+  {
+    url: "/favorite",
+    title: "Yêu thích",
+    icon: <Heart className="shirk-0 size-6" />,
   },
   {
     url: "/profile",

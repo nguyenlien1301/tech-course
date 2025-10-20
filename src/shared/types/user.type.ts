@@ -21,3 +21,10 @@ export type CreateUserParams = {
   name?: string;
   avatar?: string;
 };
+
+export type UpdateProfileUserParams = {
+  name?: string;
+  username?: string;
+  phone?: string;
+  bio?: string;
+};

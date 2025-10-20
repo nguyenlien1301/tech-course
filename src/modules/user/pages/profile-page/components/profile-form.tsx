@@ -4,8 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import z from "zod";
 
+import { useMutationUpdateProfileUser } from "@/modules/user/libs";
 import {
   Button,
   Dialog,
@@ -34,8 +36,8 @@ const formSchema = z.object({
 });
 const ProfileForm = ({ user }: { user?: User }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const mutationUpdateProfileUser = useMutationUpdateProfileUser();
 
-  console.log("🚀user---->", user);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,29 +48,45 @@ const ProfileForm = ({ user }: { user?: User }) => {
     },
   });
 
-  //   useEffect(() => {
-  //     if (user) {
-  //       form.reset({
-  //         name: user.name || "",
-  //         username: user.username || "",
-  //         phone: "",
-  //         bio: "",
-  //       });
-  //     }
-  //   }, [user?._id]);
   useEffect(() => {
     if (isOpen && user) {
       form.reset({
         name: user.name || "",
         username: user.username || "",
-        phone: "",
-        bio: "",
+        phone: user.phone || "",
+        bio: user.bio || "",
       });
     }
   }, [isOpen, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("🚀values---->", values);
+    // 1️⃣ Kiểm tra userId có tồn tại không
+
+    if (!user?.clerkId) {
+      console.error("Không tìm thấy userId");
+      toast.error("Không thể cập nhật, vui lòng đăng nhập lại!");
+
+      return;
+    }
+
+    // 2️⃣ Kiểm tra nếu dữ liệu không thay đổi thì bỏ qua
+    const isUnchanged =
+      values.name === user.name &&
+      values.username === user.username &&
+      values.phone === user.phone &&
+      values.bio === user.bio;
+
+    if (isUnchanged) {
+      toast.info("Không có thay đổi nào để lưu!");
+
+      return;
+    }
+
+    // 3️⃣ Gọi mutation
+    await mutationUpdateProfileUser.mutateAsync({
+      userId: user.clerkId,
+      updateData: values,
+    });
   }
 
   return (
@@ -79,9 +97,9 @@ const ProfileForm = ({ user }: { user?: User }) => {
           Edit
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] lg:max-w-screen-xl">
+      <DialogContent className="sm:max-w-[425px] lg:max-w-screen-md">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Sửa thông tin cá nhân</DialogTitle>
           <DialogDescription>
             Thực hiện thay đổi cho hồ sơ của bạn ở đây. Nhấp vào lưu khi bạn
             hoàn tất.
@@ -110,7 +128,7 @@ const ProfileForm = ({ user }: { user?: User }) => {
                   <FormItem>
                     <FormLabel>Tên đăng nhập</FormLabel>
                     <FormControl>
-                      <Input placeholder="Tên đầy đủ" {...field} />
+                      <Input placeholder="Tên đầy đủ" {...field} disabled />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

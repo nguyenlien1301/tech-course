@@ -1,1 +1,1 @@
-export { default } from "./course-item";
+export { default as CourseItem } from "./course-item";

@@ -1,6 +1,7 @@
 export { default as CommentModel } from "./comment.schema";
 export { default as CouponModel } from "./coupon.schema";
 export { default as CourseModel } from "./course.schema";
+export { default as FavoriteModel } from "./favorite.schema";
 export { default as HistoryModel } from "./history.schema";
 export { default as LectureModel } from "./lecture.schema";
 export { default as LessonModel } from "./lesson.schema";

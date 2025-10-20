@@ -21,6 +21,14 @@ const userSchema = new Schema<User>({
     unique: true,
     required: true,
   },
+  phone: {
+    type: String,
+    default: "",
+  },
+  bio: {
+    type: String,
+    default: "",
+  },
   courses: [
     {
       type: Schema.Types.ObjectId,

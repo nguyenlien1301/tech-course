@@ -1,10 +1,15 @@
 "use client";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useMutationAddFavorite } from "@/modules/favorite/libs";
+import { useQueryFavorites } from "@/modules/favorite/libs/query";
 import { IconEye, IconStar } from "@/shared/components/icons";
+import { useUserContext } from "@/shared/contexts";
 import { formatCurrency, formatNumberToK } from "@/shared/helper";
 import { CourseItemData } from "@/shared/types";
+import { cn } from "@/shared/utils";
 
 import CourseItemDuration from "./course-item-duration";
 
@@ -18,6 +23,14 @@ const CourseItem = ({
   data,
   url = "",
 }: CourseItemProps) => {
+  const { userInfo } = useUserContext();
+  const userId = userInfo?._id || "";
+  const { data: favorites = [] } = useQueryFavorites(userId);
+
+  const isFavorite = favorites.includes(data?._id);
+
+  const mutationAddFavorite = useMutationAddFavorite();
+
   // courseUrl: dùng 2 đường dẫn, 1 đường url là bên khu vực học tập để click vào trang bài học. còn đường dẫn kia là bên khám phá click vào trang chi tiết
   const courseUrl = url || `/course/${data.slug}`;
   const courseInfo = [
@@ -36,6 +49,13 @@ const CourseItem = ({
       (Date.now() - new Date(createdAt).getTime()) / (1000 * 60 * 60 * 24);
 
     return days <= 15; // nhỏ hơn 7 ngày thì hiện New
+  };
+
+  const handleAddFavorite = async ({ courseId }: { courseId: string }) => {
+    await mutationAddFavorite.mutateAsync({
+      user: userId,
+      course: courseId,
+    });
   };
 
   return (
@@ -84,9 +104,22 @@ const CourseItem = ({
               {formatCurrency(data.price)} đ
             </span>
           </div>
-          <Link className="btn hover-bg-btn-opacity mt-10" href={courseUrl}>
-            {cta}
-          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              className={cn(
+                "mt-10 flex items-center justify-center rounded-full border p-3 transition-all hover:text-white",
+                isFavorite
+                  ? "text-white bg-red-500 border-transparent hover:bg-red-400"
+                  : "border-secondary text-secondary hover:bg-secondary",
+              )}
+              onClick={() => handleAddFavorite({ courseId: data._id })}
+            >
+              <Heart className="size-4" />
+            </button>
+            <Link className="btn hover-bg-btn-opacity mt-10" href={courseUrl}>
+              {cta}
+            </Link>
+          </div>
         </div>
       </div>
     </div>
