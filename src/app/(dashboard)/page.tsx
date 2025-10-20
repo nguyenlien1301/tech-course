@@ -1,7 +1,7 @@
-import { CourseDashboardPage } from "@/modules/course/pages";
+import { CourseDashboardContainer } from "@/modules/course/pages";
 
 const HomePage = () => {
-  return <CourseDashboardPage />;
+  return <CourseDashboardContainer />;
 };
 
 export default HomePage;

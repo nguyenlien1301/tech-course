@@ -1,8 +1,8 @@
 "use client";
 import { useUserContext } from "@/shared/contexts";
 
-import CourseContinue from "./course-continue";
-import CourseSuggestion from "./course-suggestion";
+import CourseContinue from "./components/course-continue";
+import CourseSuggestion from "./components/course-suggestion";
 
 const CourseDashboardContainer = () => {
   const { userInfo } = useUserContext();

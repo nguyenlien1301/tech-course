@@ -1,1 +1,1 @@
-export { default as CourseDashboardPage } from "./course-dashboard-page";
+export { default as CourseDashboardContainer } from "./course-dashboard-container";

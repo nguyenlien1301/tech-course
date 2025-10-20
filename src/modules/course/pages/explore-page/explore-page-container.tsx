@@ -3,6 +3,9 @@
 import { CourseGrid, Heading } from "@/shared/components/common";
 import { IconSearch } from "@/shared/components/icons";
 import { Input } from "@/shared/components/ui";
+import { Tabs, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
+import { allValue, CourseOptions } from "@/shared/constants";
+import { courseSortOptions } from "@/shared/constants/course-constant";
 import { useQueryString } from "@/shared/hooks";
 import { QuerySearchParams } from "@/shared/types";
 
@@ -10,9 +13,9 @@ import { CourseItem } from "../../components";
 import { useQueryFetchCoursesPublic } from "../../libs";
 
 const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
-  // const { handleChangeQs, handleSearchData, handleSetDefaultStatus } =
-  //   useQueryString();
-  const { handleSearchData } = useQueryString();
+  const { handleChangeQs, handleSearchData, handleSetDefaultStatus } =
+    useQueryString();
+  // const { handleSearchData } = useQueryString();
 
   const { data, isLoading } = useQueryFetchCoursesPublic({
     search: searchParams.search,
@@ -32,7 +35,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
           />
           <IconSearch className="absolute right-3 top-1/2 size-5 -translate-y-1/2 text-gray-500" />
         </div>
-        {/* <div className="w-full max-w-sm">
+        <div className="w-full max-w-sm">
           <Tabs
             className="flex items-center justify-center gap-2 rounded-xl bg-gray-100 py-2"
             defaultValue={handleSetDefaultStatus("option")}
@@ -49,7 +52,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
               ))}
             </TabsList>
           </Tabs>
-        </div> */}
+        </div>
       </div>
       <CourseGrid isLoading={isLoading}>
         {!!courseList &&
