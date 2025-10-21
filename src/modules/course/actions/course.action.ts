@@ -46,8 +46,6 @@ export async function fetchCourseSummary() {
       return total;
     }, 0);
 
-    console.log("🚀totalRevenue---->", totalRevenue);
-
     return {
       approved,
       pending,

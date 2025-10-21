@@ -40,7 +40,7 @@ const CourseContinue = () => {
   return (
     <div className="flex flex-col">
       <div className="mb-8 flex items-center justify-between">
-        <Heading className="lg:text-xl">Tiếp tục học</Heading>
+        <Heading>Tiếp tục học</Heading>
         <div className="flex gap-2 rounded-lg bg-white p-1 shadow-sm">
           <button
             aria-label="Grid layout"

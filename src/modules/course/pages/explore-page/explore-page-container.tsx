@@ -17,7 +17,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
     useQueryString();
   // const { handleSearchData } = useQueryString();
 
-  const { data, isLoading } = useQueryFetchCoursesPublic({
+  const { data, isFetching, isLoading } = useQueryFetchCoursesPublic({
     search: searchParams.search,
     option: searchParams.option,
   });
@@ -25,7 +25,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
 
   return (
     <div className="flex flex-col">
-      <Heading className="lg:text-xl">Khám phá</Heading>
+      <Heading>Khám phá</Heading>
       <div className="mb-10 flex items-center justify-between gap-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
         <div className="relative w-full lg:w-[300px] xl:w-[600px]">
           <Input
@@ -37,7 +37,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
         </div>
         <div className="w-full max-w-sm">
           <Tabs
-            className="flex items-center justify-center gap-2 rounded-xl bg-gray-100 py-2"
+            className="flex items-center justify-center gap-2 rounded-xl bg-gray-100 py-0.5 sm:py-2"
             defaultValue={handleSetDefaultStatus("option")}
             onValueChange={(value) =>
               handleChangeQs("option", value as CourseOptions)
@@ -54,7 +54,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
           </Tabs>
         </div>
       </div>
-      <CourseGrid isLoading={isLoading}>
+      <CourseGrid isFetching={isFetching} isLoading={isLoading}>
         {!!courseList &&
           courseList.length > 0 &&
           courseList.map((course, index) => (

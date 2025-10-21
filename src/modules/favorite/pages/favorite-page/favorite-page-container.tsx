@@ -19,7 +19,7 @@ const FavoritePageContainer = () => {
 
   return (
     <div className="flex flex-col">
-      <Heading className="lg:text-xl">Danh sách khoá học yêu thích</Heading>
+      <Heading>Danh sách khoá học yêu thích</Heading>
       <CourseGrid isLoading={isLoading}>
         {!!courseList &&
           courseList.length > 0 &&

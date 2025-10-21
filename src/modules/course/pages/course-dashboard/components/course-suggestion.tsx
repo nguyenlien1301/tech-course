@@ -14,7 +14,7 @@ const CourseSuggestion = () => {
 
   return (
     <div className="flex flex-col">
-      <Heading className="lg:text-xl">Đề xuất</Heading>
+      <Heading>Đề xuất</Heading>
       <CourseGrid isLoading={isLoading}>
         {!!courseList &&
           courseList.length > 0 &&

@@ -3,17 +3,7 @@
 import { useAuth, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-import {
-  Input,
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui";
-import { allValue, CourseOptions } from "@/shared/constants";
-import { courseSortOptions } from "@/shared/constants/course-constant";
+import { Input } from "@/shared/components/ui";
 import { useSidebarContext } from "@/shared/contexts";
 import { useQueryString } from "@/shared/hooks";
 import { cn } from "@/shared/utils";
@@ -24,8 +14,7 @@ import { IconSearch, IconUsers } from "../icons";
 const Header = () => {
   const { isButtonActive } = useSidebarContext();
   const { userId } = useAuth();
-  const { handleChangeQs, handleSearchData, handleSetDefaultStatus } =
-    useQueryString();
+  const { handleSearchData } = useQueryString();
 
   return (
     <header
@@ -34,43 +23,13 @@ const Header = () => {
         isButtonActive ? "lg:left-[80px]" : "left-0 lg:left-[300px]",
       )}
     >
-      <div className="flex gap-3">
-        {/* <div className="w-full lg:ml-7 lg:w-[300px] xl:w-[400px]">
-          <Input
-            className="rounded-full"
-            placeholder="Tìm kiếm khoá học..."
-            onChange={handleSearchData}
-          />
-          <IconSearch className="size-5" />
-        </div> */}
-        <div className="relative w-full lg:ml-7 lg:w-[300px] xl:w-[400px]">
-          <Input
-            className="rounded-full pl-5 pr-10" // chừa chỗ cho icon
-            placeholder="Tìm kiếm khoá học..."
-            onChange={handleSearchData}
-          />
-          <IconSearch className="absolute right-3 top-1/2 size-5 -translate-y-1/2 text-gray-500" />
-        </div>
-        <Select
-          defaultValue={handleSetDefaultStatus("option")}
-          onValueChange={(value) =>
-            handleChangeQs("option", value as CourseOptions)
-          }
-        >
-          <SelectTrigger className="w-[150px] lg:w-[160px]">
-            <SelectValue placeholder="Chọn trạng thái" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value={allValue}>Tất cả</SelectItem>
-              {courseSortOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.title}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+      <div className="relative w-full lg:ml-7 lg:w-[300px] xl:w-[400px]">
+        <Input
+          className="rounded-full pl-5 pr-10"
+          placeholder="Tìm kiếm khoá học..."
+          onChange={handleSearchData}
+        />
+        <IconSearch className="absolute right-3 top-1/2 size-5 -translate-y-1/2 cursor-pointer text-gray-500" />
       </div>
       <div className="mt-auto flex items-center justify-end gap-5">
         <ModeToggle />

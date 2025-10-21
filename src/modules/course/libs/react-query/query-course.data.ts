@@ -20,7 +20,7 @@ export const useQueryFetchCoursesPublic = (props: QueryFetchCourseProps) => {
   const { option, search } = props;
 
   return useQuery({
-    queryKey: [QUERY_KEYS.FETCH_COURSES_PUBLIC, search, option], // queryKey: là dùng để định danh nếu để trùng thì khi fetch nó fetch nó sẽ fetch 2 cái
+    queryKey: [QUERY_KEYS.FETCH_COURSES_PUBLIC, search || "", option || ""], // queryKey: là dùng để định danh nếu để trùng thì khi fetch nó fetch nó sẽ fetch 2 cái
     queryFn: async () => {
       const hasResult = await fetchAllCoursesPublic(props);
 
