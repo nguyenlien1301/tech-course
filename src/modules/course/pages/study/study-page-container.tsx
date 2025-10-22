@@ -15,7 +15,7 @@ const StudyPageContainer = () => {
   );
 
   return (
-    <CourseGrid isLoading={isLoading} userId={!userInfo?.clerkId}>
+    <CourseGrid isLoading={isLoading}>
       {!!courses &&
         courses.length > 0 &&
         courses.map((course, index) => {

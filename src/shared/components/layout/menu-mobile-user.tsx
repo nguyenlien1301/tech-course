@@ -5,7 +5,7 @@ import { MenuItem } from "../common";
 
 const MenuMobileUser = () => {
   return (
-    <ul className="bgDarkMode borderDarkMode fixed bottom-0 left-0 flex h-16 w-full justify-center gap-5 border-t p-3 lg:hidden">
+    <ul className="bgDarkMode borderDarkMode fixed bottom-0 left-0 z-20 flex h-16 w-full justify-start gap-5 overflow-x-auto whitespace-nowrap border-t p-3 lg:hidden">
       {menuItemUser.map((item) => (
         <MenuItem
           key={item.title}

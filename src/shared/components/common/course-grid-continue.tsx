@@ -7,15 +7,13 @@ const CourseGridContinue = ({
   children,
   isLoading,
   layout,
-  userId,
 }: {
   children: React.ReactNode;
   isLoading?: boolean;
-  userId?: boolean;
   layout: string;
 }) => {
   if (layout === "grid") {
-    if (isLoading || userId) {
+    if (isLoading) {
       return (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 lg:gap-8">
           {Array.from({ length: 3 })
@@ -34,7 +32,7 @@ const CourseGridContinue = ({
     );
   }
 
-  if (layout === "row" && (isLoading || userId)) {
+  if (layout === "row" && isLoading) {
     return (
       <div className="grid grid-cols-[repeat(minmax(300px,1fr))] gap-4 lg:grid-cols-[repeat(2,minmax(300px,1fr))] xl:gap-8">
         {Array.from({ length: 4 })

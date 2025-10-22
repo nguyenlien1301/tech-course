@@ -14,6 +14,7 @@ const CourseContinue = () => {
   const { data, isLoading } = useQueryFetchUserCoursesContinue({
     clerkId: userInfo?.clerkId || "",
   });
+
   const [layout, setLayout] = useState<"grid" | "row">("row");
   const [isMounted, setIsMounted] = useState(false);
 
@@ -34,12 +35,11 @@ const CourseContinue = () => {
 
   const courseList = data || [];
 
-  // if (isLoading && courseList.length === 0)
-  //   return <EmptyData text="Bạn chưa có khoá học nào" />;
+  if (!userInfo?.clerkId) return null;
 
   return (
     <div className="flex flex-col">
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-5 flex items-center justify-between">
         <Heading>Tiếp tục học</Heading>
         <div className="flex gap-2 rounded-lg bg-white p-1 shadow-sm">
           <button
@@ -66,11 +66,7 @@ const CourseContinue = () => {
           </button>
         </div>
       </div>
-      <CourseGridContinue
-        isLoading={isLoading}
-        layout={layout}
-        userId={!userInfo?.clerkId}
-      >
+      <CourseGridContinue isLoading={isLoading} layout={layout}>
         {!!courseList &&
           courseList.length > 0 &&
           courseList.map((course, index) => {

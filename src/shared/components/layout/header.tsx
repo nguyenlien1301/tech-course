@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "borderDarkMode bgDarkMode fixed inset-x-0 top-0 z-10 border-b border-gray-200 bg-white px-6 py-4 shadow-sm transition-all duration-300 ease-in-out flex items-center justify-between",
+        "borderDarkMode bgDarkMode fixed inset-x-0 top-0 z-10 border-b border-gray-200 gap-4 bg-white px-6 py-4 shadow-sm transition-all duration-300 ease-in-out flex items-center justify-between",
         isButtonActive ? "lg:left-[80px]" : "left-0 lg:left-[300px]",
       )}
     >

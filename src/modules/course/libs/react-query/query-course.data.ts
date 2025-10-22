@@ -93,7 +93,7 @@ export const useQueryFetchUserCoursesContinue = ({
 }: QueryFetchUserCourseProps) => {
   return useQuery({
     enabled: !!clerkId,
-    queryKey: [QUERY_KEYS.FETCH_USER_COURSES], // queryKey: là dùng để định danh nếu để trùng thì khi fetch nó fetch nó sẽ fetch 2 cái
+    queryKey: [QUERY_KEYS.FETCH_USER_COURSES, clerkId], // queryKey: là dùng để định danh nếu để trùng thì khi fetch nó fetch nó sẽ fetch 2 cái
     queryFn: async () => {
       const hasResult = await fetchUserCoursesContinue({ clerkId });
 
@@ -109,8 +109,6 @@ export const useQueryFetchCourseOfUser = (userId: string) => {
     queryKey: [QUERY_KEYS.FETCH_COURSE_OF_USER, userId],
     queryFn: async () => {
       const response = await fetchCourseOfUser(userId);
-
-      console.log("🚀response---->", response);
 
       return parseData(response);
     },
