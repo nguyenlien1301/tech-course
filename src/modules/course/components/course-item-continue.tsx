@@ -77,7 +77,7 @@ const CourseItemContinue = ({
                   Mới
                 </span>
               )}
-              {data.price !== 0 && (
+              {data.price === 0 && (
                 <span className="inline-block rounded-full bg-[#2c8fff] px-3 py-1 text-xs font-medium text-white">
                   Miễn phí
                 </span>
