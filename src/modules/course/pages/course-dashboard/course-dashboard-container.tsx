@@ -1,4 +1,7 @@
 "use client";
+import { ArrowRightCircle } from "lucide-react";
+import Link from "next/link";
+
 import { useUserContext } from "@/shared/contexts";
 
 import CourseContinue from "./components/course-continue";
@@ -26,9 +29,13 @@ const CourseDashboardContainer = () => {
         </h2>
         <p>Chúc bạn có một ngày học tập thật hiệu quả và vui vẻ nhé!</p>
         <div className="mt-3 flex gap-3">
-          <div className="cursor-pointer rounded-lg bg-white px-5  py-2 text-sm font-bold text-primary">
+          <Link
+            className="group flex cursor-pointer items-center gap-3 rounded-lg bg-white px-5  py-2 text-sm font-bold text-primary"
+            href="/study"
+          >
             Tiếp tục học nhé
-          </div>
+            <ArrowRightCircle className="size-5 group-hover:animate-pulse" />
+          </Link>
         </div>
       </div>
       <CourseContinue />

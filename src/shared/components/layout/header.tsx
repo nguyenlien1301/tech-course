@@ -3,18 +3,16 @@
 import { useAuth, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-import { Input } from "@/shared/components/ui";
 import { useSidebarContext } from "@/shared/contexts";
-import { useQueryString } from "@/shared/hooks";
 import { cn } from "@/shared/utils";
 
 import { ModeToggle } from "../common";
-import { IconSearch, IconUsers } from "../icons";
+import { IconUsers } from "../icons";
 
 const Header = () => {
   const { isButtonActive } = useSidebarContext();
   const { userId } = useAuth();
-  const { handleSearchData } = useQueryString();
+  // const { handleSearchData } = useQueryString();
 
   return (
     <header
@@ -23,14 +21,15 @@ const Header = () => {
         isButtonActive ? "lg:left-[80px]" : "left-0 lg:left-[300px]",
       )}
     >
-      <div className="relative w-full lg:ml-7 lg:w-[300px] xl:w-[400px]">
+      <div />
+      {/* <div className="relative w-full lg:ml-7 lg:w-[300px] xl:w-[400px]">
         <Input
           className="rounded-full pl-5 pr-10"
           placeholder="Tìm kiếm khoá học..."
           onChange={handleSearchData}
         />
         <IconSearch className="absolute right-3 top-1/2 size-5 -translate-y-1/2 cursor-pointer text-gray-500" />
-      </div>
+      </div> */}
       <div className="mt-auto flex items-center justify-end gap-5">
         <ModeToggle />
         {userId ? (

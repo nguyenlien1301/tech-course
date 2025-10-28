@@ -41,28 +41,28 @@ const CourseContinue = () => {
     <div className="flex flex-col">
       <div className="mb-5 flex items-center justify-between">
         <Heading>Tiếp tục học</Heading>
-        <div className="flex gap-2 rounded-lg bg-white p-1 shadow-sm">
+        <div className="bgDarkMode flex gap-2 rounded-lg p-1 shadow-sm">
           <button
             aria-label="Grid layout"
             className={`rounded-md p-2 transition-all duration-300 ${
               layout === "grid"
                 ? "bg-[#0077ff] text-white shadow-md"
-                : "text-gray-600 hover:bg-gray-100"
+                : "text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600"
             }`}
             onClick={() => setLayout("grid")}
           >
-            <LayoutGrid size={20} />
+            <LayoutGrid className="text-white" size={20} />
           </button>
           <button
             aria-label="Row layout"
             className={`rounded-md p-2 transition-all duration-300 ${
               layout === "row"
                 ? "bg-[#0077ff] text-white shadow-md"
-                : "text-gray-600 hover:bg-gray-100"
+                : "text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600"
             }`}
             onClick={() => setLayout("row")}
           >
-            <Rows2 size={20} />
+            <Rows2 className="text-white" size={20} />
           </button>
         </div>
       </div>
@@ -93,3 +93,5 @@ const CourseContinue = () => {
 };
 
 export default CourseContinue;
+
+// Store has all of the default middleware added, _plus_ the logger middleware

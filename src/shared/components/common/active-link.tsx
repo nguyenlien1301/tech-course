@@ -18,7 +18,7 @@ const ActiveLink = ({ children, url }: ActiveLinkProps) => {
     <Link
       href={url}
       className={cn(
-        "flex items-center gap-3 rounded-md p-2 font-medium dark:text-graySlate transition-all",
+        "flex items-center gap-3 rounded-md p-2 font-medium dark:text-gray-300 transition-all",
         {
           "svg-animate bg-primary font-bold !text-white": isActive,
           "hover:bg-primary/20 border-transparent hover:!text-primary dark:hover:!text-white border hover:border-primary":

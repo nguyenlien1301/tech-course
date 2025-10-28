@@ -26,7 +26,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
   return (
     <div className="flex flex-col">
       <Heading>Khám phá</Heading>
-      <div className="mb-10 flex items-center justify-between gap-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+      <div className="bgDarkMode borderDarkMode mb-10 flex items-center justify-between gap-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
         <div className="relative w-full lg:w-[300px] xl:w-[600px]">
           <Input
             className="rounded-full pl-5 pr-10" // chừa chỗ cho icon
@@ -37,7 +37,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
         </div>
         <div className="w-full max-w-sm">
           <Tabs
-            className="flex items-center justify-center gap-2 rounded-xl bg-gray-100 py-0.5 sm:py-2"
+            className="flex items-center justify-center gap-2 rounded-xl bg-gray-100 py-0.5 dark:bg-grayDarkest sm:py-2"
             defaultValue={handleSetDefaultStatus("option")}
             onValueChange={(value) =>
               handleChangeQs("option", value as CourseOptions)

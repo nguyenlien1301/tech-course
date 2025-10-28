@@ -107,7 +107,7 @@ const CourseItem = ({
           <div className="flex items-center gap-3">
             <button
               className={cn(
-                "mt-10 flex items-center justify-center rounded-full border p-3 transition-all hover:text-white",
+                "flex items-center justify-center rounded-full border p-3 transition-all hover:text-white",
                 isFavorite
                   ? "text-white bg-red-500 border-transparent hover:bg-red-400"
                   : "border-secondary text-secondary hover:bg-secondary",
@@ -116,7 +116,7 @@ const CourseItem = ({
             >
               <Heart className="size-4" />
             </button>
-            <Link className="btn hover-bg-btn-opacity mt-10" href={courseUrl}>
+            <Link className="btn hover-bg-btn-opacity" href={courseUrl}>
               {cta}
             </Link>
           </div>

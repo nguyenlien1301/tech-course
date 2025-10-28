@@ -34,7 +34,7 @@ const CourseGridContinue = ({
 
   if (layout === "row" && isLoading) {
     return (
-      <div className="grid grid-cols-[repeat(minmax(300px,1fr))] gap-4 lg:grid-cols-[repeat(2,minmax(300px,1fr))] xl:gap-8">
+      <div className="grid grid-cols-[repeat(minmax(300px,1fr))] gap-4 xl:grid-cols-[repeat(2,minmax(300px,1fr))] xl:gap-8">
         {Array.from({ length: 4 })
           .fill(0)
           .map((_, index) => (
@@ -55,7 +55,7 @@ const CourseGridContinue = ({
   }
 
   return (
-    <div className="grid grid-cols-[repeat(minmax(300px,1fr))] gap-4 lg:grid-cols-[repeat(2,minmax(300px,1fr))] xl:gap-8">
+    <div className="grid grid-cols-[repeat(minmax(300px,1fr))] gap-4 xl:grid-cols-[repeat(2,minmax(300px,1fr))] xl:gap-8">
       {children}
     </div>
   );

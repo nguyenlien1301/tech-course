@@ -15,7 +15,7 @@ function MenuItem({ icon, onlyIcon, title = "", url = "/" }: MenuItemProps) {
       <ActiveLink url={url}>
         <span
           className={cn(
-            "flex size-6 shrink-0 items-center justify-center rounded-lg transition-transform duration-200 dark:bg-transparent dark:text-white",
+            "flex size-6 shrink-0 items-center justify-center rounded-lg transition-transform duration-200 dark:bg-transparent dark:text-gray-300",
             {
               "scale-105": !onlyIcon,
             },

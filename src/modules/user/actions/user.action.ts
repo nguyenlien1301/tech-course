@@ -77,8 +77,6 @@ export async function createUser(params: CreateUserParams) {
     connectToDatabase();
     const newUser = await UserModel.create(params);
 
-    console.log("🚀newUser---->", newUser);
-
     return newUser;
   } catch (error) {
     console.log("🚀error function createUser ---->", error);
