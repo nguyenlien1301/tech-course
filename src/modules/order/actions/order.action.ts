@@ -1,7 +1,6 @@
 "use server";
 
 import { FilterQuery } from "mongoose";
-import { revalidatePath } from "next/cache";
 
 import { OrderStatus } from "@/shared/constants";
 import { connectToDatabase } from "@/shared/lib";
@@ -193,7 +192,6 @@ export async function updateOrder({
       // findUser.courses.pull(findOrder.course._id);
       findUser.save();
     }
-    revalidatePath("/manage/order");
 
     return {
       success: true,

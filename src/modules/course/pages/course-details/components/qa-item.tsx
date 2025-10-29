@@ -1,3 +1,5 @@
+import { SendHorizontal } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
@@ -14,7 +16,10 @@ const QaItem = ({ item }: QaItemProps) => {
     <Accordion collapsible type="single">
       <AccordionItem value={item.question}>
         <AccordionTrigger>{item.question}</AccordionTrigger>
-        <AccordionContent>{item.answer}</AccordionContent>
+        <AccordionContent className="flex items-center gap-3">
+          <SendHorizontal className="size-5 text-secondary" />
+          {item.answer}
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   );

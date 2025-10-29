@@ -41,15 +41,21 @@ const CourseWidget = ({ data, duration }: CourseWidgetProps) => {
         khóa học đầy đủ
       </h3>
       <div className="mb-3 flex items-center gap-2">
-        <strong className="text-xl font-bold text-primary">
-          {formatCurrency(price)} đ
-        </strong>
+        {data?.sale_price === 0 ? (
+          <strong className="text-md font-bold text-primary">Miễn phí</strong>
+        ) : (
+          <strong className="text-xl font-bold text-primary">
+            {formatCurrency(price)} đ
+          </strong>
+        )}
         <span className="text-sm text-slate-500 line-through">
           {formatCurrency(data.sale_price)} đ
         </span>
-        <span className="ml-auto inline-block rounded-xl bg-primary/20 px-3 py-1 text-sm font-semibold text-primary">
-          {Math.floor((data.price / data.sale_price) * 100)} %
-        </span>
+        {data?.sale_price !== 0 && (
+          <span className="ml-auto inline-block rounded-xl bg-primary/20 px-3 py-1 text-sm font-semibold text-primary">
+            {Math.floor((data.price / data.sale_price) * 100)} %
+          </span>
+        )}
       </div>
       <h3 className="mb-3 text-sm font-semibold">Khoá học bao gồm:</h3>
       <ul className="mb-5 flex flex-col gap-2 text-sm text-slate-500">
@@ -71,12 +77,14 @@ const CourseWidget = ({ data, duration }: CourseWidgetProps) => {
         </li>
       </ul>
       <ButtonEnroll amount={price} coupon={coupon} courseId={data._id} />
-      <CouponForm
-        courseId={data._id}
-        originalPrice={data.price}
-        setCouponId={setCoupon}
-        setPrice={setPrice}
-      />
+      {data?.sale_price !== 0 && (
+        <CouponForm
+          courseId={data._id}
+          originalPrice={data.price}
+          setCouponId={setCoupon}
+          setPrice={setPrice}
+        />
+      )}
     </div>
   );
 };

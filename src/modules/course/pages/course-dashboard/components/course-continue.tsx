@@ -47,22 +47,22 @@ const CourseContinue = () => {
             className={`rounded-md p-2 transition-all duration-300 ${
               layout === "grid"
                 ? "bg-[#0077ff] text-white shadow-md"
-                : "text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600"
+                : "text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600"
             }`}
             onClick={() => setLayout("grid")}
           >
-            <LayoutGrid className="text-white" size={20} />
+            <LayoutGrid size={20} />
           </button>
           <button
             aria-label="Row layout"
             className={`rounded-md p-2 transition-all duration-300 ${
               layout === "row"
                 ? "bg-[#0077ff] text-white shadow-md"
-                : "text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600"
+                : "text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600"
             }`}
             onClick={() => setLayout("row")}
           >
-            <Rows2 className="text-white" size={20} />
+            <Rows2 size={20} />
           </button>
         </div>
       </div>

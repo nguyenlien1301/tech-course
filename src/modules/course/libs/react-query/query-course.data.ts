@@ -49,7 +49,7 @@ export const useQueryFetchCourses = (props: QueryFetchCourseProps) => {
 
 export const useQueryFetchCourseBySlug = (slug: string) => {
   return useQuery<CourseItemData>({
-    queryKey: [QUERY_KEYS.FETCH_COURSE_BY_SLUG],
+    queryKey: [QUERY_KEYS.FETCH_COURSE_BY_SLUG, slug],
     queryFn: async () => {
       const response = await fetchCourseBySlug({ slug });
 
@@ -61,7 +61,7 @@ export const useQueryFetchCourseBySlug = (slug: string) => {
 
 export const useQueryFetchCourseLessonInfo = (slug: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.FETCH_COURSE_LESSON_INFO],
+    queryKey: [QUERY_KEYS.FETCH_COURSE_LESSON_INFO, slug],
     queryFn: async () => {
       if (!slug) return null;
       const response = await getCourseLessonInfo({ slug });
@@ -96,6 +96,8 @@ export const useQueryFetchUserCoursesContinue = ({
     queryKey: [QUERY_KEYS.FETCH_USER_COURSES, clerkId], // queryKey: là dùng để định danh nếu để trùng thì khi fetch nó fetch nó sẽ fetch 2 cái
     queryFn: async () => {
       const hasResult = await fetchUserCoursesContinue({ clerkId });
+
+      console.log("🚀hasResult---->", hasResult);
 
       return hasResult || [];
     },
