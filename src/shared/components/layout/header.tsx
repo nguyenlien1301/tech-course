@@ -13,6 +13,15 @@ const Header = () => {
   const { isButtonActive } = useSidebarContext();
   const { userId } = useAuth();
   // const { handleSearchData } = useQueryString();
+  // 🕐 Hàm xác định thời gian trong ngày
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+
+    if (hour < 12) return "Good morning 🌤️";
+    if (hour < 18) return "Good afternoon 🌇";
+
+    return "Good evening 🌙";
+  };
 
   return (
     <header
@@ -21,6 +30,9 @@ const Header = () => {
         isButtonActive ? "lg:left-[80px]" : "left-0 lg:left-[300px]",
       )}
     >
+      <div className="text-xl font-bold text-primary md:text-2xl">
+        {getGreeting()}
+      </div>
       <div />
       {/* <div className="relative w-full lg:ml-7 lg:w-[300px] xl:w-[400px]">
         <Input

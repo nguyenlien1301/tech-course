@@ -57,7 +57,7 @@ const CourseItemContinue = ({
           )}
         </Link>
         <div className="flex flex-1 flex-col">
-          <h3 className="mb-3 text-base font-bold">{data.title}</h3>
+          <h3 className="mb-3 text-sm font-bold sm:text-base">{data.title}</h3>
           <div className="mt-auto">
             <div className="mb-5 flex items-center gap-3 text-xs text-gray-500">
               {courseInfo.map((item, index) => (
@@ -85,7 +85,7 @@ const CourseItemContinue = ({
             </div>
           </div>
           <Link
-            className="btn hover-bg-btn-opacity mb-0 ml-auto mt-auto w-max px-5 text-sm font-bold"
+            className="btn hover-bg-btn-opacity mb-0 ml-auto mt-auto h-8 w-max px-3 text-xs font-bold sm:h-10 sm:px-5 sm:text-sm"
             href={courseUrl}
           >
             {cta}

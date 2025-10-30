@@ -14,7 +14,7 @@ const CourseGrid = ({
 }) => {
   if (isLoading || isFetching) {
     return (
-      <div className="grid grid-cols-[repeat(2,minmax(250px,1fr))] gap-4 sm:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] lg:gap-8">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 lg:gap-8">
         {Array.from({ length: 3 })
           .fill(0)
           .map((_, index) => (
@@ -25,7 +25,7 @@ const CourseGrid = ({
   }
 
   return (
-    <div className="grid grid-cols-[repeat(2,minmax(250px,1fr))] gap-4 sm:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] lg:gap-8">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 lg:gap-8">
       {children}
     </div>
   );

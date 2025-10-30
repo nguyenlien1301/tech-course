@@ -14,6 +14,7 @@ const config: Config = {
     extend: {
       screens: {
         "3xl": "1600px",
+        mb: "440px",
       },
       fontFamily: {
         primary: ["var(--font-manrope)"],

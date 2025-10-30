@@ -26,7 +26,7 @@ const ExplorePageContainer = ({ searchParams }: QuerySearchParams) => {
   return (
     <div className="flex flex-col">
       <Heading>Khám phá</Heading>
-      <div className="bgDarkMode borderDarkMode mb-10 flex items-center justify-between gap-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+      <div className="bgDarkMode borderDarkMode mb-10 flex flex-col items-center justify-between gap-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:flex-row">
         <div className="relative w-full lg:w-[300px] xl:w-[600px]">
           <Input
             className="rounded-full pl-5 pr-10" // chừa chỗ cho icon
